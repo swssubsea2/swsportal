@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWS Document Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#f5f7fa;
+    color:#111827;
+}
+
+/* HEADER */
+.header{
+    height:80px;
+    background:#ffffff;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 40px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    height:55px;
+}
+
+.portal-title{
+    font-size:22px;
+    font-weight:600;
+    color:#003E7E;
+}
+
+.portal-subtitle{
+    font-size:12px;
+    color:#6b7280;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-btn{
+    background:#003E7E;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+    box-shadow:0 6px 16px rgba(0,62,126,.18);
+    transition:.25s;
+}
+
+.admin-btn:hover{
+    background:#002a55;
+    transform:translateY(-2px);
+}
+
+/* HERO */
+.hero{
+    min-height:520px;
+    background:
+    linear-gradient(rgba(0,0,0,.60), rgba(0,0,0,.60)),
+    url('hero.jpg');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-content{
+    max-width:900px;
+    padding:20px;
+}
+
+.hero-content h1{
+    font-size:72px;
+    font-weight:300;
+    margin-bottom:15px;
+}
+
+.hero-content p{
+    font-size:20px;
+    opacity:.9;
+    line-height:1.7;
+}
+
+/* NEWS TICKER */
+.ticker{
+    height:42px;
+    background:#30567C;
+    color:white;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker span{
+    display:inline-block;
+    line-height:42px;
+    padding-left:100%;
+    animation:ticker 30s linear infinite;
+}
+
+@keyframes ticker{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+}
+
+/* PORTAL SPOTLIGHT SECTION */
+.portal-section{
+    position:relative;
+    padding:85px 20px 95px;
+    background:
+        radial-gradient(circle at top left, rgba(59,130,246,.35), transparent 34%),
+        linear-gradient(135deg, #002B57 0%, #003E7E 48%, #071426 100%);
+    overflow:hidden;
+}
+
+.portal-section::before{
+    content:"";
+    position:absolute;
+    inset:24px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:26px;
+    pointer-events:none;
+}
+
+.portal-container{
+    position:relative;
+    max-width:1180px;
+    margin:auto;
+    z-index:1;
+}
+
+.spotlight-label{
+    width:max-content;
+    margin:0 auto 18px;
+    padding:8px 18px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:30px;
+    color:#dbeafe;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.section-title{
+    text-align:center;
+    font-size:46px;
+    font-weight:300;
+    color:white;
+}
+
+.section-subtitle{
+    text-align:center;
+    color:#dbeafe;
+    margin-top:12px;
+    margin-bottom:45px;
+    font-size:17px;
+}
+
+.portal-grid-main{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:26px;
+}
+
+.portal-row{
+    position:relative;
+    background:rgba(255,255,255,.96);
+    border-radius:24px;
+    box-shadow:0 24px 60px rgba(0,0,0,.22);
+    padding:38px;
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.3s;
+    overflow:hidden;
+}
+
+.portal-row::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:7px;
+}
+
+.portal-row.hq::before{
+    background:#003E7E;
+}
+
+.portal-row.worksite::before{
+    background:#0A84FF;
+}
+
+.portal-row:hover{
+    transform:translateY(-7px);
+    box-shadow:0 30px 70px rgba(0,0,0,.28);
+}
+
+.portal-icon{
+    width:76px;
+    height:76px;
+    border-radius:22px;
+    background:#eef4ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:36px;
+    margin-bottom:24px;
+}
+
+.portal-info h3{
+    font-size:34px;
+    color:#003E7E;
+    margin-bottom:14px;
+    font-weight:500;
+}
+
+.portal-info p{
+    color:#4b5563;
+    line-height:1.75;
+    max-width:100%;
+    font-size:15px;
+}
+
+.portal-btn{
+    margin-top:28px;
+}
+
+.portal-btn a{
+    background:#003E7E;
+    color:white;
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:30px;
+    font-weight:600;
+    display:inline-block;
+}
+
+.portal-btn a:hover{
+    background:#002a55;
+}
+
+.portal-row.worksite .portal-btn a{
+    background:#0A84FF;
+}
+
+.portal-row.worksite .portal-btn a:hover{
+    background:#006edc;
+}
+
+/* CONTENT SECTIONS */
+.content-container{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.card-title{
+    font-size:32px;
+    font-weight:300;
+    color:#003E7E;
+    margin-bottom:20px;
+}
+
+/* LATEST UPDATES */
+.updates-list{
+    list-style:none;
+}
+
+.updates-list li{
+    padding:14px 0;
+    border-bottom:1px solid #e5e7eb;
+    color:#374151;
+}
+
+.updates-list li:last-child{
+    border-bottom:none;
+}
+
+/* QUICK ACCESS + DOCUMENT STATISTICS - SAME STYLE */
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.quick-item{
+    background:#f7f9fc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+    min-height:58px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:#111827;
+}
+
+.quick-item:hover{
+    background:#eef4ff;
+    transform:translateY(-3px);
+}
+
+.stat-number{
+    color:#003E7E;
+    font-weight:600;
+}
+
+/* CAMPAIGN */
+
+.campaign-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+}
+
+.campaign-card{
+    background:#f7f9fc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:18px;
+    text-align:center;
+}
+
+.campaign-card img{
+    width:100%;
+    max-height:520px;
+    object-fit:contain;
+    border-radius:12px;
+    background:white;
+}
+
+.campaign-card h3{
+    margin-top:15px;
+    color:#003E7E;
+    font-size:18px;
+}
+
+.campaign-card p{
+    margin-top:8px;
+    color:#374151;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+.footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px;
+    margin-top:40px;
+}
+
+.footer p{
+    opacity:.8;
+    margin:5px 0;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .header{
+        padding:0 20px;
+    }
+
+
+    .hero{
+        min-height:420px;
+    }
+
+    .hero-content h1{
+        font-size:42px;
+    }
+
+    .hero-content p{
+        font-size:16px;
+    }
+
+    .portal-grid-main{
+        grid-template-columns:1fr;
+    }
+
+    .portal-row{
+        text-align:center;
+    }
+
+    .portal-icon{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .section-title{
+        font-size:34px;
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="logo.png" alt="SWS Logo">
+        <div>
+            <div class="portal-title">SUBSEA WORLWIDE SOLUTIONS (SWS) DOCUMENT PORTAL</div>
+            <div class="portal-subtitle">Subsea Division, Alam Maritim Group of Companies</div>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <a href="https://docs.google.com/spreadsheets/d/1YIZprCXV76NSLh-9UM9iWyiDEOExSXv3ey_N8arXpXU/edit?gid=0#gid=0" class="admin-btn" target="_blank">Admin Page</a>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>One Portal.<br>One Source of Truth.</h1>
+        <p>
+            The SWS Document Portal provides a centralized platform for the Subsea Division to access the latest controlled documents, including procedures, forms, work instructions, guidelines, and management system documents
+        </p>
+    </div>
+</section>
+
+<div class="ticker">
+    <span id="tickerContainer">Loading announcements...</span>
+</div>
+
+<section class="portal-section">
+    <div class="portal-container">
+        <div class="spotlight-label">Main Portal Access</div>
+        <h2 class="section-title">Choose Your Document Access</h2>
+        <p class="section-subtitle">
+         
+        </p>
+
+        <div class="portal-grid-main">
+            <div class="portal-row hq">
+                <div class="portal-left">
+                    <div class="portal-icon">🏢</div>
+                    <div class="portal-info">
+                        <h3>HQ Portal</h3>
+                        <p>
+                            Access all controlled documents, procedures, forms,
+                            guidelines, records and management system information
+                            available within the organization.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="portal-btn">
+                    <a href="hq.html">Enter HQ Portal →</a>
+                </div>
+            </div>
+
+            <div class="portal-row worksite">
+                <div class="portal-left">
+                    <div class="portal-icon">🚢</div>
+                    <div class="portal-info">
+                        <h3>Work Site Portal</h3>
+                        <p>
+                            Access approved procedures, forms, work instructions
+                            and guidelines applicable to work site personnel
+                            and project operations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="portal-btn">
+                    <a href="worksite.html">Enter Work Site Portal →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="content-container">
+    <div class="card">
+        <h2 class="card-title">Latest Updates</h2>
+        <ul class="updates-list" id="latestUpdatesContainer">
+            <li>📄 QA Procedure Rev.03 Released</li>
+            <li>📄 Approved Supplier List Updated</li>
+            <li>📄 Risk Assessment Guideline Updated</li>
+            <li>📄 Procurement Form Updated</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Quick Access</h2>
+        <div class="quick-grid" id="quickAccessContainer">
+            <div class="quick-item">Loading quick access...</div>
+        </div>
+    </div>
+
+<div class="card campaign">
+    <h2 class="card-title">Campaign & Announcement</h2>
+
+    <div id="campaignContainer" class="campaign-grid">
+        Loading campaign posters...
+    </div>
+</div>
+
+
+
+
+
+
+
+<footer class="footer">
+    <p>SWS Document Portal v1.0</p>
+    <p>Developed & Maintained by SWS Quality Department</p>
+    <p>© 2026 Subsea Worldwide Solutions</p>
+</footer>
+
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbzk5D4uBUJdBLcAMwSzxKSs6nujsjHYzlqssFASR4O8jq65gKYq1eAvWnmFRRC7BQ7fHg/exec";
+
+function jsonp(action, callbackName){
+    const old = document.getElementById(callbackName);
+    if(old) old.remove();
+
+    const script = document.createElement("script");
+    script.id = callbackName;
+    script.src = API_URL + "?action=" + encodeURIComponent(action) + "&callback=" + callbackName + "&t=" + Date.now();
+    script.onerror = function(){
+        console.log("Failed loading", action);
+    };
+    document.body.appendChild(script);
+}
+
+function convertGoogleDriveLink(url){
+    if(!url) return "";
+    if(url.includes("drive.google.com/file/d/")){
+        const fileId = url.split("/d/")[1].split("/")[0];
+        return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200";
+    }
+    return url;
+}
+
+function openLink(url){
+    return url ? url : "#";
+}
+
+window.handleLatest = function(response){
+    const container = document.getElementById("latestUpdatesContainer");
+    if(!container) return;
+
+    if(!response.success || !response.latest || response.latest.length === 0){
+        container.innerHTML = "<li>No latest update found.</li>";
+        return;
+    }
+
+    container.innerHTML = response.latest.map(item =>
+        `<li>${item.icon || "📄"} ${item.text}</li>`
+    ).join("");
+};
+
+window.handleQuick = function(response){
+    const container = document.getElementById("quickAccessContainer");
+    if(!container) return;
+
+    if(!response.success || !response.quick || response.quick.length === 0){
+        container.innerHTML = `<div class="quick-item">No quick access found.</div>`;
+        return;
+    }
+
+    container.innerHTML = response.quick.map(item => {
+        const label = (item.icon ? item.icon + " " : "") + item.title;
+        if(item.link){
+            return `<a class="quick-item" href="${openLink(item.link)}" target="_blank" style="text-decoration:none;">${label}</a>`;
+        }
+        return `<div class="quick-item">${label}</div>`;
+    }).join("");
+};
+
+window.handleCampaign = function(response){
+    const container = document.getElementById("campaignContainer");
+    if(!container) return;
+
+    if(!response.success || !response.campaign || response.campaign.length === 0){
+        container.innerHTML = "No active poster found.";
+        return;
+    }
+
+    container.innerHTML = response.campaign.map(item => {
+        const imageDirectUrl = convertGoogleDriveLink(item.imageUrl);
+        return `
+            <div class="campaign-card">
+                <img src="${imageDirectUrl}" alt="${item.title}">
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+            </div>
+        `;
+    }).join("");
+};
+
+window.handleTicker = function(response){
+    const container = document.getElementById("tickerContainer");
+    if(!container) return;
+
+    if(!response.success || !response.ticker || response.ticker.length === 0){
+        container.innerHTML = "No active announcement.";
+        return;
+    }
+
+    container.innerHTML = response.ticker.map(item => {
+        const icon = item.icon ? item.icon + " " : "";
+        return icon + item.message;
+    }).join(" &bull; ");
+};
+
+jsonp("ticker", "handleTicker");
+jsonp("latest", "handleLatest");
+jsonp("quick", "handleQuick");
+jsonp("campaign", "handleCampaign");
+
+</script>
+
+
+
+
+</body>
+</html>

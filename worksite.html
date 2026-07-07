@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SWS Work Site Portal</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f5f7fa;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.hero{
+    background:#003E7E;
+    color:white;
+    padding:40px 0;
+}
+
+.hero h1{
+    font-weight:300;
+}
+
+.card-custom{
+    background:white;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    padding:25px;
+    margin-top:25px;
+    margin-bottom:60px;
+}
+
+.department-header{
+    background:#eef4ff;
+    color:#003E7E;
+    font-weight:600;
+    padding:12px;
+    border-radius:8px;
+    margin-top:25px;
+}
+
+.table td,
+.table th{
+    vertical-align:middle;
+}
+
+.doc-table{
+    width:100%;
+    table-layout:fixed;
+}
+
+.doc-table th,
+.doc-table td{
+    overflow-wrap:anywhere;
+}
+
+.doc-table .col-docno{width:18%;}
+.doc-table .col-title{width:32%;}
+.doc-table .col-type{width:14%;}
+.doc-table .col-rev{width:8%; text-align:center;}
+.doc-table .col-date{width:16%;}
+.doc-table .col-action{width:12%; text-align:center;}
+
+.btn-open{
+    background:#003E7E;
+    color:white;
+}
+
+.btn-open:hover{
+    background:#002f60;
+    color:white;
+}
+
+.stats{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.back-home{
+    display:inline-block;
+    margin-top:15px;
+    background:white;
+    color:#003E7E;
+    text-decoration:none;
+    padding:9px 18px;
+    border-radius:30px;
+    font-weight:600;
+    font-size:14px;
+}
+
+.back-home:hover{
+    background:#eef4ff;
+    color:#002f60;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div class="container">
+
+<h1>Work Site Portal</h1>
+
+<p>
+Controlled Documents Applicable to Work Site
+</p>
+
+<a href="Homepage.html" class="back-home">← Back to Homepage</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="card-custom">
+
+<input
+    type="text"
+    id="searchBox"
+    class="form-control"
+    placeholder="Search document..."
+>
+
+<div class="stats mt-3" id="stats">
+Loading MDR...
+</div>
+
+<div id="content"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbzk5D4uBUJdBLcAMwSzxKSs6nujsjHYzlqssFASR4O8jq65gKYq1eAvWnmFRRC7BQ7fHg/exec";
+
+function jsonp(action, callbackName){
+    const old = document.getElementById(callbackName + "Script");
+    if(old) old.remove();
+
+    const script = document.createElement("script");
+    script.id = callbackName + "Script";
+    script.src = API_URL + "?action=" + encodeURIComponent(action) + "&callback=" + callbackName + "&t=" + Date.now();
+    script.onerror = function(){
+        document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
+    };
+    document.body.appendChild(script);
+}
+
+function safe(value){
+    return value ? String(value).trim() : '';
+}
+
+function escapeHTML(value){
+    return safe(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
+
+function getDocumentLink(doc){
+    const storage = safe(doc.storage).toLowerCase();
+    const link = safe(doc.link);
+
+    if(!link){
+        return '#';
+    }
+
+    if(storage === 'server'){
+        if(link.startsWith('\\')){
+            return 'file://///' + link
+                .replace(/^\\+/, '')
+                .replaceAll('\\', '/')
+                .replaceAll(' ', '%20');
+        }
+
+        if(/^[A-Za-z]:\\/.test(link)){
+            return 'file:///' + link
+                .replaceAll('\\', '/')
+                .replaceAll(' ', '%20');
+        }
+    }
+
+    return link;
+}
+
+function renderDocuments(docs){
+    const departments = {};
+
+    docs.forEach(doc => {
+        const department = safe(doc.department) || 'Unassigned';
+
+        if(!departments[department]){
+            departments[department] = [];
+        }
+
+        departments[department].push(doc);
+    });
+
+    document.getElementById('stats').innerHTML =
+        docs.length + ' document(s) available';
+
+    let html = '';
+
+    Object.keys(departments).forEach(department => {
+
+        html += `
+        <div class="department-header">
+            ${escapeHTML(department)}
+            (${departments[department].length})
+        </div>
+
+        <table class="table table-hover doc-table">
+
+        <colgroup>
+            <col class="col-docno">
+            <col class="col-title">
+            <col class="col-type">
+            <col class="col-rev">
+            <col class="col-date">
+            <col class="col-action">
+        </colgroup>
+
+        <thead>
+        <tr>
+            <th>Document No</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Rev</th>
+            <th>Rev Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        `;
+
+        departments[department].forEach(doc => {
+            html += `
+            <tr>
+                <td>${escapeHTML(doc.docNo)}</td>
+                <td>${escapeHTML(doc.title)}</td>
+                <td>${escapeHTML(doc.type)}</td>
+                <td class="text-center">${escapeHTML(doc.revNo)}</td>
+                <td>${escapeHTML(doc.revDate)}</td>
+                <td class="text-center">
+                    <a href="${getDocumentLink(doc)}" target="_blank" class="btn btn-sm btn-open">Open</a>
+                </td>
+            </tr>
+            `;
+        });
+
+        html += `
+        </tbody>
+        </table>
+        `;
+
+    });
+
+    document.getElementById('content').innerHTML = html || 'No document found.';
+}
+
+window.handleDocuments = function(response){
+
+    if(!response || !response.success || !response.documents){
+        document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
+        return;
+    }
+
+    let docs = response.documents;
+
+    docs = docs.filter(doc => safe(doc.applicableToWorksite).toLowerCase() === 'yes');
+
+    renderDocuments(docs);
+};
+
+jsonp('documents', 'handleDocuments');
+
+document.addEventListener('keyup', function(){
+
+    const searchBox = document.getElementById('searchBox');
+
+    if(!searchBox){
+        return;
+    }
+
+    const search = searchBox.value.toLowerCase();
+
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(search) ? '' : 'none';
+    });
+
+});
+
+</script>
+
+
+</body>
+
+</html>
