@@ -67,6 +67,14 @@ body{
 .doc-table .col-date{width:16%;}
 .doc-table .col-action{width:12%; text-align:center;}
 
+.doc-table th:nth-child(4),
+.doc-table td:nth-child(4),
+.doc-table th:nth-child(6),
+.doc-table td:nth-child(6){
+    text-align:center !important;
+}
+
+    
 .btn-open{
     background:#003E7E;
     color:white;
@@ -242,9 +250,9 @@ function renderDocuments(docs){
             <th>Document No</th>
             <th>Title</th>
             <th>Type</th>
-            <th>Rev</th>
+            <th class="text-center">Rev</th>
             <th>Rev Date</th>
-            <th>Action</th>
+            <th class="text-center">Action</th>
         </tr>
         </thead>
 
