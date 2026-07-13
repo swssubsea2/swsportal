@@ -312,33 +312,132 @@ body{
     border-bottom:none;
 }
 
-/* QUICK ACCESS + DOCUMENT STATISTICS - SAME STYLE */
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:15px;
-}
-
-.quick-item{
-    background:#f7f9fc;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:20px;
-    text-align:center;
-    cursor:pointer;
-    transition:.3s;
-    min-height:58px;
+/* QUICK ACCESS */
+.quick-access-list{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-    font-size:14px;
-    color:#111827;
+    flex-direction:column;
+    gap:18px;
 }
 
-.quick-item:hover{
-    background:#eef4ff;
-    transform:translateY(-3px);
+.quick-access-card{
+    display:grid;
+    grid-template-columns:180px minmax(0,1fr) 180px 180px 54px;
+    gap:20px;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg, rgba(238,244,255,.95), rgba(255,255,255,.98));
+    border:1px solid #dbe7f5;
+    border-radius:22px;
+    box-shadow:0 10px 28px rgba(0,62,126,.08);
+    transition:.25s ease;
+}
+
+.quick-access-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,62,126,.14);
+    border-color:#b8d0ee;
+}
+
+.quick-access-logo-wrap{
+    min-height:120px;
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    text-decoration:none;
+}
+
+.quick-access-logo{
+    max-width:135px;
+    max-height:82px;
+    object-fit:contain;
+}
+
+.quick-access-fallback{
+    width:62px;
+    height:62px;
+    border-radius:18px;
+    background:#003E7E;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:600;
+}
+
+.quick-access-main{
+    min-width:0;
+}
+
+.quick-access-name{
+    color:#003E7E;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.quick-access-description{
+    color:#4b5563;
+    line-height:1.65;
+    font-size:14px;
+}
+
+.quick-access-meta{
+    min-height:82px;
+    padding:16px;
+    border-left:1px solid #dbe7f5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.quick-access-meta-label{
+    color:#6b7280;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.quick-access-meta-value{
+    color:#111827;
+    font-size:14px;
+    line-height:1.45;
+}
+
+.quick-access-open{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#003E7E;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:22px;
+    box-shadow:0 8px 18px rgba(0,62,126,.22);
+    transition:.25s;
+}
+
+.quick-access-open:hover{
+    background:#002a55;
+    color:white;
+    transform:translateX(3px);
+}
+
+.quick-access-empty{
+    padding:28px;
+    text-align:center;
+    color:#6b7280;
+    background:#f7f9fc;
+    border:1px dashed #cbd5e1;
+    border-radius:16px;
 }
 
 .stat-number{
@@ -432,9 +531,27 @@ body{
     .section-title{
         font-size:34px;
     }
+    .quick-access-card{
+        grid-template-columns:1fr;
+        gap:14px;
+        padding:16px;
+    }
 
-    .quick-grid{
-        grid-template-columns:repeat(2,1fr);
+    .quick-access-logo-wrap{
+        min-height:105px;
+    }
+
+    .quick-access-meta{
+        min-height:auto;
+        border-left:none;
+        border-top:1px solid #dbe7f5;
+        padding:14px 0 0;
+    }
+
+    .quick-access-open{
+        width:100%;
+        height:44px;
+        border-radius:12px;
     }
 }
 </style>
@@ -530,8 +647,9 @@ body{
 
     <div class="card">
         <h2 class="card-title">Quick Access</h2>
-        <div class="quick-grid" id="quickAccessContainer">
-            <div class="quick-item">Loading quick access...</div>
+
+        <div id="quickAccessContainer" class="quick-access-list">
+            <div class="quick-access-empty">Loading quick access...</div>
         </div>
     </div>
 
@@ -601,19 +719,92 @@ window.handleLatest = function(response){
 
 window.handleQuick = function(response){
     const container = document.getElementById("quickAccessContainer");
-    if(!container) return;
 
-    if(!response.success || !response.quick || response.quick.length === 0){
-        container.innerHTML = `<div class="quick-item">No quick access found.</div>`;
+    if(!container){
+        return;
+    }
+
+    if(
+        !response ||
+        !response.success ||
+        !response.quick ||
+        response.quick.length === 0
+    ){
+        container.innerHTML = `
+            <div class="quick-access-empty">
+                No quick access found.
+            </div>
+        `;
         return;
     }
 
     container.innerHTML = response.quick.map(item => {
-        const label = (item.icon ? item.icon + " " : "") + item.title;
-        if(item.link){
-            return `<a class="quick-item" href="${openLink(item.link)}" target="_blank" style="text-decoration:none;">${label}</a>`;
-        }
-        return `<div class="quick-item">${label}</div>`;
+        const title = item.title || "Quick Access";
+        const link = openLink(item.link);
+
+        const imageUrl = convertGoogleDriveLink(
+            item.imageUrl ||
+            item.image ||
+            item.logo ||
+            ""
+        );
+
+        const description =
+            item.description ||
+            item.desc ||
+            "No description available.";
+
+        const applicability =
+            item.applicability ||
+            item.applicableTo ||
+            "General";
+
+        const owner =
+            item.owner ||
+            item.department ||
+            "Not specified";
+
+        const logoContent = imageUrl
+            ? `<img src="${imageUrl}" alt="${title}" class="quick-access-logo">`
+            : `<div class="quick-access-fallback">${title.charAt(0)}</div>`;
+
+        return `
+            <div class="quick-access-card">
+                <a
+                    href="${link}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="quick-access-logo-wrap"
+                    title="Open ${title}"
+                >
+                    ${logoContent}
+                </a>
+
+                <div class="quick-access-main">
+                    <div class="quick-access-name">${title}</div>
+                    <div class="quick-access-description">${description}</div>
+                </div>
+
+                <div class="quick-access-meta">
+                    <div class="quick-access-meta-label">Applicability</div>
+                    <div class="quick-access-meta-value">${applicability}</div>
+                </div>
+
+                <div class="quick-access-meta">
+                    <div class="quick-access-meta-label">Owner</div>
+                    <div class="quick-access-meta-value">${owner}</div>
+                </div>
+
+                <a
+                    href="${link}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="quick-access-open"
+                    title="Open link"
+                    aria-label="Open ${title}"
+                >→</a>
+            </div>
+        `;
     }).join("");
 };
 
