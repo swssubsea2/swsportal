@@ -60,21 +60,39 @@ body{
     overflow-wrap:anywhere;
 }
 
-.doc-table .col-docno{width:18%;}
-.doc-table .col-title{width:32%;}
-.doc-table .col-type{width:14%;}
-.doc-table .col-rev{width:8%; text-align:center;}
-.doc-table .col-date{width:16%;}
-.doc-table .col-action{width:12%; text-align:center;}
+.doc-table .col-docno{width:16%;}
+.doc-table .col-title{width:30%;}
+.doc-table .col-type{width:13%;}
+.doc-table .col-rev{width:7%;}
+.doc-table .col-date{width:14%;}
+.doc-table .col-open{width:10%;}
+.doc-table .col-guide{width:10%;}
 
 .doc-table th:nth-child(4),
 .doc-table td:nth-child(4),
 .doc-table th:nth-child(6),
-.doc-table td:nth-child(6){
+.doc-table td:nth-child(6),
+.doc-table th:nth-child(7),
+.doc-table td:nth-child(7){
     text-align:center !important;
 }
 
     
+
+.btn-guide{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:34px;
+height:34px;
+border-radius:50%;
+background:#dc3545;
+color:#fff;
+text-decoration:none;
+font-size:16px;
+}
+.btn-guide:hover{background:#b02a37;color:#fff;}
+
 .btn-open{
     background:#003E7E;
     color:white;
@@ -208,6 +226,17 @@ function getDocumentLink(doc){
     return link;
 }
 
+
+function getVideoLink(doc){
+    return safe(doc.videoLink || doc.video || doc.youtubeLink);
+}
+
+function renderGuideButton(doc){
+    const videoLink=getVideoLink(doc);
+    if(!videoLink) return '';
+    return `<a href="${escapeHTML(videoLink)}" target="_blank" class="btn-guide" title="Watch Guide">▶</a>`;
+}
+
 function renderDocuments(docs){
     const departments = {};
 
@@ -242,7 +271,8 @@ function renderDocuments(docs){
             <col class="col-type">
             <col class="col-rev">
             <col class="col-date">
-            <col class="col-action">
+            <col class="col-open">
+            <col class="col-guide">
         </colgroup>
 
         <thead>
@@ -252,7 +282,8 @@ function renderDocuments(docs){
             <th>Type</th>
             <th class="text-center">Rev</th>
             <th>Rev Date</th>
-            <th class="text-center">Action</th>
+            <th class="text-center">Open</th>
+            <th class="text-center">Guide</th>
         </tr>
         </thead>
 
@@ -270,6 +301,7 @@ function renderDocuments(docs){
                 <td class="text-center">
                     <a href="${getDocumentLink(doc)}" target="_blank" class="btn btn-sm btn-open">Open</a>
                 </td>
+                <td class="text-center">${renderGuideButton(doc)}</td>
             </tr>
             `;
         });
