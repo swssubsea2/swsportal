@@ -880,13 +880,40 @@ body{
         <div class="hq-modal-header">
             <div>
                 <h3 id="hqModalTitle">HQ Portal Access</h3>
-                <p>Enter the HQ access password before continuing.</p>
+                <p>Choose how you want to access HQ documents.</p>
             </div>
             <button type="button" class="hq-modal-close" onclick="closeHQModal()" aria-label="Close">×</button>
         </div>
 
         <div class="hq-modal-body">
-            <div id="hqLoginStep">
+
+            <div id="hqChoiceStep">
+                <h4 class="hq-choice-title">Choose how to continue</h4>
+                <p class="hq-choice-text">
+                    Open the HQ webpage or access the company file server.
+                </p>
+
+                <div class="hq-choice-grid">
+                    <button type="button" class="hq-choice" onclick="showHQPassword()">
+                        <span class="hq-choice-icon">🌐</span>
+                        <strong>Open HQ Portal</strong>
+                        <small>Enter the password before opening the HQ webpage.</small>
+                    </button>
+
+                    <button type="button" class="hq-choice" onclick="showServerAccess()">
+                        <span class="hq-choice-icon">📁</span>
+                        <strong>File Server</strong>
+                        <small>View and copy the company server location.</small>
+                    </button>
+                </div>
+            </div>
+
+            <div id="hqLoginStep" hidden>
+                <h4 class="hq-choice-title">HQ Portal Password</h4>
+                <p class="hq-choice-text">
+                    Enter the HQ access password to continue.
+                </p>
+
                 <label class="hq-field-label" for="hqPassword">Password</label>
 
                 <div class="hq-password-row">
@@ -898,32 +925,15 @@ body{
                         autocomplete="current-password"
                     >
                     <button type="button" class="hq-primary-btn" onclick="checkHQPassword()">
-                        Continue
+                        Open HQ Portal
                     </button>
                 </div>
 
                 <div id="hqPasswordError" class="hq-error"></div>
-            </div>
 
-            <div id="hqChoiceStep" hidden>
-                <h4 class="hq-choice-title">Choose how to continue</h4>
-                <p class="hq-choice-text">
-                    Open the online HQ document page, or access the company file server.
-                </p>
-
-                <div class="hq-choice-grid">
-                    <button type="button" class="hq-choice" onclick="openHQPortal()">
-                        <span class="hq-choice-icon">🌐</span>
-                        <strong>Open HQ Portal</strong>
-                        <small>Continue to the HQ document webpage.</small>
-                    </button>
-
-                    <button type="button" class="hq-choice" onclick="showServerAccess()">
-                        <span class="hq-choice-icon">📁</span>
-                        <strong>File Server</strong>
-                        <small>View and copy the company server location.</small>
-                    </button>
-                </div>
+                <button type="button" class="hq-secondary-btn" onclick="backToHQChoice()">
+                    Back
+                </button>
             </div>
 
             <div id="hqServerStep" hidden>
@@ -971,7 +981,6 @@ function openHQLogin(){
     modal.classList.add("show");
     document.body.style.overflow = "hidden";
 
-    setTimeout(() => passwordInput.focus(), 50);
 }
 
 function closeHQModal(){
@@ -981,8 +990,8 @@ function closeHQModal(){
 }
 
 function resetHQModal(){
-    document.getElementById("hqLoginStep").hidden = false;
-    document.getElementById("hqChoiceStep").hidden = true;
+    document.getElementById("hqChoiceStep").hidden = false;
+    document.getElementById("hqLoginStep").hidden = true;
     document.getElementById("hqServerStep").hidden = true;
     document.getElementById("hqPassword").value = "";
     document.getElementById("hqPasswordError").textContent = "";
@@ -996,8 +1005,7 @@ function checkHQPassword(){
 
     if(enteredPassword === HQ_PASSWORD){
         errorBox.textContent = "";
-        document.getElementById("hqLoginStep").hidden = true;
-        document.getElementById("hqChoiceStep").hidden = false;
+        window.location.href = HQ_PAGE;
         return;
     }
 
@@ -1005,8 +1013,18 @@ function checkHQPassword(){
     document.getElementById("hqPassword").select();
 }
 
+function showHQPassword(){
+    document.getElementById("hqChoiceStep").hidden = true;
+    document.getElementById("hqServerStep").hidden = true;
+    document.getElementById("hqLoginStep").hidden = false;
+
+    setTimeout(() => {
+        document.getElementById("hqPassword").focus();
+    }, 50);
+}
+
 function openHQPortal(){
-    window.location.href = HQ_PAGE;
+    showHQPassword();
 }
 
 function showServerAccess(){
@@ -1016,8 +1034,10 @@ function showServerAccess(){
 }
 
 function backToHQChoice(){
+    document.getElementById("hqLoginStep").hidden = true;
     document.getElementById("hqServerStep").hidden = true;
     document.getElementById("hqChoiceStep").hidden = false;
+    document.getElementById("hqPasswordError").textContent = "";
 }
 
 async function copyServerPath(){
