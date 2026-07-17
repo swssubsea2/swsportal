@@ -32,8 +32,8 @@ body{
     border-radius:15px;
     box-shadow:0 3px 12px rgba(0,0,0,.08);
     padding:25px;
-    margin-top:25px;
-    margin-bottom:60px;
+    margin-top:0;
+    margin-bottom:0;
 }
 
 .department-header{
@@ -77,21 +77,23 @@ body{
     text-align:center !important;
 }
 
-    
-
 .btn-guide{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-width:34px;
-height:34px;
-border-radius:50%;
-background:#dc3545;
-color:#fff;
-text-decoration:none;
-font-size:16px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#dc3545;
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
 }
-.btn-guide:hover{background:#b02a37;color:#fff;}
+
+.btn-guide:hover{
+    background:#b02a37;
+    color:#fff;
+}
 
 .btn-open{
     background:#003E7E;
@@ -126,6 +128,219 @@ font-size:16px;
     color:#002f60;
 }
 
+/* BALANCED TWO-COLUMN LAYOUT */
+.portal-container{
+    max-width:1380px;
+    margin:0 auto;
+    padding-left:38px;
+    padding-right:38px;
+}
+
+.portal-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 360px;
+    gap:24px;
+    align-items:start;
+    margin-top:25px;
+    margin-bottom:60px;
+}
+
+/* QUICK ACCESS */
+.quick-access-panel{
+    position:sticky;
+    top:22px;
+}
+
+.quick-access-title{
+    color:#003E7E;
+    font-size:30px;
+    font-weight:300;
+    margin:0 0 16px;
+}
+
+.quick-access-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.quick-access-card{
+    display:grid;
+    grid-template-columns:92px minmax(0,1fr) 42px;
+    gap:14px;
+    align-items:center;
+    min-height:198px;
+    background:linear-gradient(135deg,#f1f6ff,#ffffff);
+    border:1px solid #d7e5f7;
+    border-radius:18px;
+    padding:16px;
+    text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,62,126,.06);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.quick-access-card:hover{
+    transform:translateY(-2px);
+    border-color:#aac7ea;
+    box-shadow:0 12px 28px rgba(0,62,126,.12);
+}
+
+.quick-access-image{
+    width:92px;
+    height:76px;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid #e4e9f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    padding:8px;
+}
+
+.quick-access-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.quick-access-placeholder{
+    font-size:32px;
+}
+
+.quick-access-content{
+    min-width:0;
+}
+
+.quick-access-content h3{
+    color:#003E7E;
+    font-size:18px;
+    font-weight:700;
+    margin:0 0 7px;
+    line-height:1.3;
+}
+
+.quick-access-description{
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.45;
+    margin-bottom:10px;
+}
+
+.quick-access-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+}
+
+.quick-access-meta div{
+    border-top:1px solid #d9e3f0;
+    padding-top:6px;
+}
+
+.quick-access-meta span{
+    display:block;
+    color:#64748b;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.quick-access-meta strong{
+    display:block;
+    color:#111827;
+    font-size:12px;
+    font-weight:500;
+    margin-top:2px;
+}
+
+.quick-access-arrow{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#003E7E;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    box-shadow:0 7px 16px rgba(0,62,126,.20);
+}
+
+.quick-access-empty{
+    background:#fff;
+    border:1px dashed #cbd5e1;
+    border-radius:16px;
+    padding:22px;
+    color:#64748b;
+    text-align:center;
+    font-size:14px;
+}
+
+@media(max-width:1200px){
+    .portal-container{
+        padding-left:24px;
+        padding-right:24px;
+    }
+
+    .portal-layout{
+        grid-template-columns:minmax(0,1fr) 320px;
+    }
+
+    .quick-access-card{
+        grid-template-columns:76px minmax(0,1fr) 38px;
+        padding:14px;
+    }
+
+    .quick-access-image{
+        width:76px;
+        height:68px;
+    }
+}
+
+@media(max-width:992px){
+    .portal-layout{
+        grid-template-columns:1fr;
+    }
+
+    .quick-access-panel{
+        position:static;
+    }
+
+    .quick-access-list{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:650px){
+    .portal-container{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .quick-access-list{
+        grid-template-columns:1fr;
+    }
+
+    .quick-access-card{
+        grid-template-columns:74px minmax(0,1fr) 38px;
+    }
+
+    .card-custom{
+        padding:16px;
+    }
+
+    .doc-table{
+        min-width:800px;
+    }
+
+    #content{
+        overflow-x:auto;
+    }
+}
+
 </style>
 
 </head>
@@ -148,22 +363,31 @@ Controlled Documents Applicable to Work Site
 
 </div>
 
-<div class="container">
+<div class="container-fluid portal-container">
 
-<div class="card-custom">
+<div class="portal-layout">
 
-<input
-    type="text"
-    id="searchBox"
-    class="form-control"
-    placeholder="Search document..."
->
+    <main class="card-custom">
 
-<div class="stats mt-3" id="stats">
-Loading MDR...
-</div>
+        <input
+            type="text"
+            id="searchBox"
+            class="form-control"
+            placeholder="Search document..."
+        >
 
-<div id="content"></div>
+        <div class="stats mt-3" id="stats">
+            Loading MDR...
+        </div>
+
+        <div id="content"></div>
+
+    </main>
+
+    <aside class="quick-access-panel">
+        <h2 class="quick-access-title">Quick Access</h2>
+        <div id="quickAccessList" class="quick-access-list"></div>
+    </aside>
 
 </div>
 
@@ -174,6 +398,48 @@ Loading MDR...
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
 
+/*
+=========================================================
+QUICK ACCESS
+=========================================================
+Edit the items below to change Work Site Quick Access.
+
+image:
+- Use a direct image URL, or
+- Use a local image such as "images/quality-induction.png"
+
+link:
+- Website: https://...
+- Relative page/file: folder/file.html
+*/
+
+const quickAccessItems = [
+    {
+        title: "SWS Quality Induction",
+        description: "No description available.",
+        applicability: "Worksite & HQ",
+        owner: "Quality Department",
+        image: "https://dummyimage.com/240x160/ffffff/003e7e.png&text=SWS+QUALITY%0AINDUCTION",
+        link: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+        title: "Worksite Forms",
+        description: "Quick access to forms used during worksite operations.",
+        applicability: "Worksite",
+        owner: "Operations Department",
+        image: "",
+        link: "#"
+    },
+    {
+        title: "Emergency Contacts",
+        description: "View important worksite and emergency contact information.",
+        applicability: "Worksite",
+        owner: "HSE Department",
+        image: "",
+        link: "#"
+    }
+];
+
 function jsonp(action, callbackName){
     const old = document.getElementById(callbackName + "Script");
     if(old) old.remove();
@@ -181,9 +447,11 @@ function jsonp(action, callbackName){
     const script = document.createElement("script");
     script.id = callbackName + "Script";
     script.src = API_URL + "?action=" + encodeURIComponent(action) + "&callback=" + callbackName + "&t=" + Date.now();
+
     script.onerror = function(){
         document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
     };
+
     document.body.appendChild(script);
 }
 
@@ -226,15 +494,82 @@ function getDocumentLink(doc){
     return link;
 }
 
-
 function getVideoLink(doc){
     return safe(doc.videoLink || doc.video || doc.youtubeLink);
 }
 
 function renderGuideButton(doc){
-    const videoLink=getVideoLink(doc);
-    if(!videoLink) return '';
-    return `<a href="${escapeHTML(videoLink)}" target="_blank" class="btn-guide" title="Watch Guide">▶</a>`;
+    const videoLink = getVideoLink(doc);
+
+    if(!videoLink){
+        return '';
+    }
+
+    return `
+        <a
+            href="${escapeHTML(videoLink)}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-guide"
+            title="Watch Guide"
+        >▶</a>
+    `;
+}
+
+function renderQuickAccess(){
+    const container = document.getElementById("quickAccessList");
+
+    if(!quickAccessItems.length){
+        container.innerHTML = `
+            <div class="quick-access-empty">
+                No Quick Access item available.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = quickAccessItems.map(item => {
+        const image = safe(item.image);
+
+        const imageHTML = image
+            ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}">`
+            : `<span class="quick-access-placeholder">📄</span>`;
+
+        return `
+            <a
+                class="quick-access-card"
+                href="${escapeHTML(item.link || "#")}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="quick-access-image">
+                    ${imageHTML}
+                </div>
+
+                <div class="quick-access-content">
+                    <h3>${escapeHTML(item.title)}</h3>
+
+                    <div class="quick-access-description">
+                        ${escapeHTML(item.description || "No description available.")}
+                    </div>
+
+                    <div class="quick-access-meta">
+                        <div>
+                            <span>Applicability</span>
+                            <strong>${escapeHTML(item.applicability || "-")}</strong>
+                        </div>
+
+                        <div>
+                            <span>Owner</span>
+                            <strong>${escapeHTML(item.owner || "-")}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="quick-access-arrow">→</span>
+            </a>
+        `;
+    }).join("");
 }
 
 function renderDocuments(docs){
@@ -255,7 +590,7 @@ function renderDocuments(docs){
 
     let html = '';
 
-    Object.keys(departments).forEach(department => {
+    Object.keys(departments).sort().forEach(department => {
 
         html += `
         <div class="department-header">
@@ -299,7 +634,12 @@ function renderDocuments(docs){
                 <td class="text-center">${escapeHTML(doc.revNo)}</td>
                 <td>${escapeHTML(doc.revDate)}</td>
                 <td class="text-center">
-                    <a href="${getDocumentLink(doc)}" target="_blank" class="btn btn-sm btn-open">Open</a>
+                    <a
+                        href="${getDocumentLink(doc)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-sm btn-open"
+                    >Open</a>
                 </td>
                 <td class="text-center">${renderGuideButton(doc)}</td>
             </tr>
@@ -310,46 +650,43 @@ function renderDocuments(docs){
         </tbody>
         </table>
         `;
-
     });
 
-    document.getElementById('content').innerHTML = html || 'No document found.';
+    document.getElementById('content').innerHTML =
+        html || 'No document found.';
 }
 
 window.handleDocuments = function(response){
 
     if(!response || !response.success || !response.documents){
-        document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
+        document.getElementById('stats').innerHTML =
+            'Error loading MDR from API.';
         return;
     }
 
     let docs = response.documents;
 
-    docs = docs.filter(doc => safe(doc.applicableToWorksite).toLowerCase() === 'yes');
+    docs = docs.filter(doc =>
+        safe(doc.applicableToWorksite).toLowerCase() === 'yes'
+    );
 
     renderDocuments(docs);
 };
 
 jsonp('documents', 'handleDocuments');
 
-document.addEventListener('keyup', function(){
-
-    const searchBox = document.getElementById('searchBox');
-
-    if(!searchBox){
-        return;
-    }
-
-    const search = searchBox.value.toLowerCase();
+document.getElementById('searchBox').addEventListener('input', function(){
+    const search = safe(this.value).toLowerCase();
 
     document.querySelectorAll('tbody tr').forEach(row => {
-        row.style.display = row.innerText.toLowerCase().includes(search) ? '' : 'none';
+        row.style.display =
+            row.innerText.toLowerCase().includes(search) ? '' : 'none';
     });
-
 });
 
-</script>
+renderQuickAccess();
 
+</script>
 
 </body>
 
