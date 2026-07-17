@@ -497,25 +497,211 @@ body{
 }
 
 
-/* HQ SERVER ACCESS MODAL */
-.server-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
-.server-modal.show{display:flex}
-.server-modal-card{width:min(560px,100%);background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden}
-.server-modal-header{background:linear-gradient(135deg,#003E7E,#0A84FF);color:#fff;padding:26px 30px;display:flex;justify-content:space-between;gap:20px}
-.server-modal-header h3{font-size:26px;margin-bottom:6px}
-.server-modal-header p{font-size:14px;opacity:.9;line-height:1.5}
-.server-modal-close{border:0;background:rgba(255,255,255,.18);color:#fff;width:38px;height:38px;border-radius:50%;font-size:22px;cursor:pointer}
-.server-modal-body{padding:28px 30px 30px}
-.server-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a5f;border-radius:14px;padding:14px 16px;line-height:1.6;font-size:14px;margin-bottom:20px}
-.server-steps{margin:0 0 22px 22px;color:#374151;line-height:1.8;font-size:14px}
-.server-path-label{font-size:12px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.server-path-box{display:flex;gap:10px;align-items:center;background:#f8fafc;border:1px solid #cbd5e1;border-radius:14px;padding:12px}
-.server-path{flex:1;border:0;background:transparent;color:#111827;font-family:Consolas,monospace;font-size:14px;outline:none;min-width:0}
-.copy-server-btn{border:0;background:#003E7E;color:#fff;padding:11px 16px;border-radius:10px;font-weight:600;cursor:pointer;white-space:nowrap}
-.copy-server-btn:hover{background:#002a55}
-.server-status{min-height:22px;color:#047857;font-size:13px;margin-top:10px;font-weight:600}
-.server-modal-actions{display:flex;justify-content:flex-end;margin-top:18px}
-.secondary-btn{border:1px solid #cbd5e1;background:#fff;color:#334155;padding:11px 18px;border-radius:10px;cursor:pointer;font-weight:600}
+/* HQ PASSWORD & SERVER ACCESS MODAL */
+.hq-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(7,20,38,.72);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+}
+
+.hq-modal.show{
+    display:flex;
+}
+
+.hq-modal-card{
+    width:min(520px, 100%);
+    background:#ffffff;
+    border-radius:22px;
+    box-shadow:0 28px 80px rgba(0,0,0,.30);
+    overflow:hidden;
+    animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+    from{opacity:0; transform:translateY(12px) scale(.98);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+}
+
+.hq-modal-header{
+    background:linear-gradient(135deg,#002B57,#003E7E);
+    color:white;
+    padding:25px 28px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:18px;
+}
+
+.hq-modal-header h3{
+    font-size:24px;
+    margin-bottom:6px;
+}
+
+.hq-modal-header p{
+    color:#dbeafe;
+    font-size:13px;
+    line-height:1.55;
+}
+
+.hq-modal-close{
+    border:0;
+    background:rgba(255,255,255,.14);
+    color:white;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:22px;
+}
+
+.hq-modal-body{
+    padding:28px;
+}
+
+.hq-field-label{
+    display:block;
+    color:#374151;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.hq-password-row{
+    display:flex;
+    gap:10px;
+}
+
+.hq-password-input{
+    flex:1;
+    min-width:0;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:13px 14px;
+    font:inherit;
+    outline:none;
+}
+
+.hq-password-input:focus{
+    border-color:#0A84FF;
+    box-shadow:0 0 0 3px rgba(10,132,255,.13);
+}
+
+.hq-primary-btn,
+.hq-secondary-btn{
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    font:inherit;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.hq-primary-btn{
+    background:#003E7E;
+    color:white;
+}
+
+.hq-primary-btn:hover{
+    background:#002a55;
+}
+
+.hq-secondary-btn{
+    background:#eef4ff;
+    color:#003E7E;
+}
+
+.hq-error{
+    min-height:20px;
+    margin-top:9px;
+    color:#b91c1c;
+    font-size:13px;
+}
+
+.hq-choice-title{
+    color:#003E7E;
+    font-size:21px;
+    margin-bottom:8px;
+}
+
+.hq-choice-text{
+    color:#4b5563;
+    line-height:1.6;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.hq-choice-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.hq-choice{
+    border:1px solid #dbe7f5;
+    background:#f8fbff;
+    border-radius:16px;
+    padding:18px;
+    text-align:left;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.hq-choice:hover{
+    transform:translateY(-2px);
+    border-color:#9ebfe5;
+    box-shadow:0 10px 24px rgba(0,62,126,.10);
+}
+
+.hq-choice-icon{
+    font-size:28px;
+    display:block;
+    margin-bottom:10px;
+}
+
+.hq-choice strong{
+    display:block;
+    color:#003E7E;
+    margin-bottom:6px;
+}
+
+.hq-choice small{
+    color:#64748b;
+    line-height:1.45;
+}
+
+.server-path-box{
+    background:#f1f5f9;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:13px;
+    margin:14px 0;
+    font-family:Consolas, monospace;
+    font-size:13px;
+    overflow-wrap:anywhere;
+    color:#0f172a;
+}
+
+.hq-note{
+    color:#6b7280;
+    font-size:12px;
+    line-height:1.55;
+    margin-top:13px;
+}
+
+@media(max-width:600px){
+    .hq-choice-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hq-password-row{
+        flex-direction:column;
+    }
+}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -630,7 +816,7 @@ body{
                 </div>
 
                 <div class="portal-btn">
-                    <a href="#" onclick="openServerModal(); return false;">Enter HQ Portal →</a>
+                    <a href="#" onclick="openHQLogin(); return false;">Enter HQ Portal →</a>
                 </div>
             </div>
 
@@ -689,33 +875,79 @@ body{
 
 
 
-<div id="serverModal" class="server-modal" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
-  <div class="server-modal-card">
-    <div class="server-modal-header">
-      <div>
-        <h3 id="serverModalTitle">Open HQ Server</h3>
-        <p>HQ documents are available through the company network only.</p>
-      </div>
-      <button class="server-modal-close" type="button" onclick="closeServerModal()" aria-label="Close">×</button>
+<div id="hqModal" class="hq-modal" role="dialog" aria-modal="true" aria-labelledby="hqModalTitle">
+    <div class="hq-modal-card">
+        <div class="hq-modal-header">
+            <div>
+                <h3 id="hqModalTitle">HQ Portal Access</h3>
+                <p>Enter the HQ access password before continuing.</p>
+            </div>
+            <button type="button" class="hq-modal-close" onclick="closeHQModal()" aria-label="Close">×</button>
+        </div>
+
+        <div class="hq-modal-body">
+            <div id="hqLoginStep">
+                <label class="hq-field-label" for="hqPassword">Password</label>
+
+                <div class="hq-password-row">
+                    <input
+                        id="hqPassword"
+                        class="hq-password-input"
+                        type="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                    >
+                    <button type="button" class="hq-primary-btn" onclick="checkHQPassword()">
+                        Continue
+                    </button>
+                </div>
+
+                <div id="hqPasswordError" class="hq-error"></div>
+            </div>
+
+            <div id="hqChoiceStep" hidden>
+                <h4 class="hq-choice-title">Choose how to continue</h4>
+                <p class="hq-choice-text">
+                    Open the online HQ document page, or access the company file server.
+                </p>
+
+                <div class="hq-choice-grid">
+                    <button type="button" class="hq-choice" onclick="openHQPortal()">
+                        <span class="hq-choice-icon">🌐</span>
+                        <strong>Open HQ Portal</strong>
+                        <small>Continue to the HQ document webpage.</small>
+                    </button>
+
+                    <button type="button" class="hq-choice" onclick="showServerAccess()">
+                        <span class="hq-choice-icon">📁</span>
+                        <strong>File Server</strong>
+                        <small>View and copy the company server location.</small>
+                    </button>
+                </div>
+            </div>
+
+            <div id="hqServerStep" hidden>
+                <h4 class="hq-choice-title">Company File Server</h4>
+                <p class="hq-choice-text">
+                    Copy this path and paste it into Windows File Explorer.
+                </p>
+
+                <div id="serverPathText" class="server-path-box">\\192.168.0.170\SWS-Document-Portal</div>
+
+                <button type="button" class="hq-primary-btn" onclick="copyServerPath()">
+                    Copy Server Path
+                </button>
+
+                <button type="button" class="hq-secondary-btn" onclick="backToHQChoice()">
+                    Back
+                </button>
+
+                <p id="copyStatus" class="hq-note">
+                    The server is available only when connected to the company network or approved VPN.
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="server-modal-body">
-      <div class="server-note">Make sure your computer is connected to the company intranet or VPN.</div>
-      <ol class="server-steps">
-        <li>Click <strong>Copy Server Path</strong>.</li>
-        <li>Open <strong>File Explorer</strong>.</li>
-        <li>Paste the path into the address bar and press <strong>Enter</strong>.</li>
-      </ol>
-      <div class="server-path-label">HQ Server Folder Path</div>
-      <div class="server-path-box">
-        <input id="serverPath" class="server-path" type="text" value="\\192.168.0.170\SWS-Document-Portal" readonly>
-        <button class="copy-server-btn" type="button" onclick="copyServerPath()">Copy Server Path</button>
-      </div>
-      <div id="serverStatus" class="server-status"></div>
-      <div class="server-modal-actions">
-        <button class="secondary-btn" type="button" onclick="closeServerModal()">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <footer class="footer">
@@ -727,31 +959,105 @@ body{
 <script>
 
 
-function openServerModal(){
-  document.getElementById("serverModal").classList.add("show");
-  document.body.style.overflow="hidden";
+const HQ_PASSWORD = "SWS00";
+const HQ_PAGE = "hq.html";
+const HQ_SERVER_PATH = "\\\\192.168.0.170\\SWS-Document-Portal";
+
+function openHQLogin(){
+    const modal = document.getElementById("hqModal");
+    const passwordInput = document.getElementById("hqPassword");
+
+    resetHQModal();
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => passwordInput.focus(), 50);
 }
-function closeServerModal(){
-  document.getElementById("serverModal").classList.remove("show");
-  document.body.style.overflow="";
+
+function closeHQModal(){
+    document.getElementById("hqModal").classList.remove("show");
+    document.body.style.overflow = "";
+    resetHQModal();
 }
-function copyServerPath(){
-  const input=document.getElementById("serverPath");
-  const status=document.getElementById("serverStatus");
-  const done=()=>status.textContent="Server path copied. Open File Explorer and paste it into the address bar.";
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(input.value).then(done).catch(()=>fallbackCopy(input,done));
-  }else{
-    fallbackCopy(input,done);
-  }
+
+function resetHQModal(){
+    document.getElementById("hqLoginStep").hidden = false;
+    document.getElementById("hqChoiceStep").hidden = true;
+    document.getElementById("hqServerStep").hidden = true;
+    document.getElementById("hqPassword").value = "";
+    document.getElementById("hqPasswordError").textContent = "";
+    document.getElementById("copyStatus").textContent =
+        "The server is available only when connected to the company network or approved VPN.";
 }
-function fallbackCopy(input,done){
-  input.focus(); input.select(); input.setSelectionRange(0,99999);
-  try{document.execCommand("copy");done();}
-  catch(e){document.getElementById("serverStatus").textContent="Please select and copy the path manually.";}
+
+function checkHQPassword(){
+    const enteredPassword = document.getElementById("hqPassword").value;
+    const errorBox = document.getElementById("hqPasswordError");
+
+    if(enteredPassword === HQ_PASSWORD){
+        errorBox.textContent = "";
+        document.getElementById("hqLoginStep").hidden = true;
+        document.getElementById("hqChoiceStep").hidden = false;
+        return;
+    }
+
+    errorBox.textContent = "Incorrect password. Please try again.";
+    document.getElementById("hqPassword").select();
 }
-document.addEventListener("click",e=>{if(e.target.id==="serverModal")closeServerModal();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeServerModal();});
+
+function openHQPortal(){
+    window.location.href = HQ_PAGE;
+}
+
+function showServerAccess(){
+    document.getElementById("hqChoiceStep").hidden = true;
+    document.getElementById("hqServerStep").hidden = false;
+    document.getElementById("serverPathText").textContent = HQ_SERVER_PATH;
+}
+
+function backToHQChoice(){
+    document.getElementById("hqServerStep").hidden = true;
+    document.getElementById("hqChoiceStep").hidden = false;
+}
+
+async function copyServerPath(){
+    const status = document.getElementById("copyStatus");
+
+    try{
+        await navigator.clipboard.writeText(HQ_SERVER_PATH);
+        status.textContent = "Server path copied. Open File Explorer, paste it into the address bar, then press Enter.";
+    }catch(error){
+        const temporaryInput = document.createElement("textarea");
+        temporaryInput.value = HQ_SERVER_PATH;
+        temporaryInput.style.position = "fixed";
+        temporaryInput.style.opacity = "0";
+        document.body.appendChild(temporaryInput);
+        temporaryInput.select();
+        document.execCommand("copy");
+        temporaryInput.remove();
+
+        status.textContent = "Server path copied. Open File Explorer, paste it into the address bar, then press Enter.";
+    }
+}
+
+document.getElementById("hqPassword").addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        checkHQPassword();
+    }
+});
+
+document.getElementById("hqModal").addEventListener("click", function(event){
+    if(event.target === this){
+        closeHQModal();
+    }
+});
+
+document.addEventListener("keydown", function(event){
+    if(event.key === "Escape"){
+        closeHQModal();
+    }
+});
+
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
 
