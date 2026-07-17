@@ -129,6 +129,205 @@ body{
     color:#002f60;
 }
 
+
+.portal-layout{
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 360px;
+    gap:24px;
+    align-items:start;
+    margin-top:25px;
+    margin-bottom:60px;
+}
+
+.portal-layout .card-custom{
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.quick-access-panel{
+    position:sticky;
+    top:22px;
+}
+
+.quick-access-title{
+    color:#003E7E;
+    font-size:30px;
+    font-weight:300;
+    margin:0 0 16px;
+}
+
+.quick-access-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.quick-access-card{
+    display:grid;
+    grid-template-columns:92px minmax(0,1fr) 42px;
+    gap:14px;
+    align-items:center;
+    background:linear-gradient(135deg,#f1f6ff,#ffffff);
+    border:1px solid #d7e5f7;
+    border-radius:18px;
+    padding:16px;
+    text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,62,126,.06);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.quick-access-card:hover{
+    transform:translateY(-2px);
+    border-color:#aac7ea;
+    box-shadow:0 12px 28px rgba(0,62,126,.12);
+}
+
+.quick-access-image{
+    width:92px;
+    height:76px;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid #e4e9f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    padding:8px;
+}
+
+.quick-access-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.quick-access-placeholder{
+    font-size:32px;
+}
+
+.quick-access-content{
+    min-width:0;
+}
+
+.quick-access-content h3{
+    color:#003E7E;
+    font-size:17px;
+    font-weight:700;
+    margin:0 0 7px;
+    line-height:1.3;
+}
+
+.quick-access-description{
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.45;
+    margin-bottom:10px;
+}
+
+.quick-access-meta{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+}
+
+.quick-access-meta div{
+    border-top:1px solid #d9e3f0;
+    padding-top:6px;
+}
+
+.quick-access-meta span{
+    display:block;
+    color:#64748b;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.quick-access-meta strong{
+    display:block;
+    color:#111827;
+    font-size:12px;
+    font-weight:500;
+    margin-top:2px;
+}
+
+.quick-access-arrow{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#003E7E;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    box-shadow:0 7px 16px rgba(0,62,126,.20);
+}
+
+.quick-access-empty{
+    background:#fff;
+    border:1px dashed #cbd5e1;
+    border-radius:16px;
+    padding:22px;
+    color:#64748b;
+    text-align:center;
+    font-size:14px;
+}
+
+@media(max-width:1200px){
+    .portal-layout{
+        grid-template-columns:minmax(0,1fr) 320px;
+    }
+
+    .quick-access-card{
+        grid-template-columns:76px minmax(0,1fr) 38px;
+        padding:14px;
+    }
+
+    .quick-access-image{
+        width:76px;
+        height:68px;
+    }
+}
+
+@media(max-width:992px){
+    .portal-layout{
+        grid-template-columns:1fr;
+    }
+
+    .quick-access-panel{
+        position:static;
+    }
+
+    .quick-access-list{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:650px){
+    .quick-access-list{
+        grid-template-columns:1fr;
+    }
+
+    .quick-access-card{
+        grid-template-columns:74px minmax(0,1fr) 38px;
+    }
+
+    .card-custom{
+        padding:16px;
+    }
+
+    .doc-table{
+        min-width:800px;
+    }
+
+    #content{
+        overflow-x:auto;
+    }
+}
+
 </style>
 
 </head>
@@ -145,7 +344,7 @@ body{
 All Controlled Documents
 </p>
 
-<a href="index.html" class="back-home">← Back to Homepage</a>
+<a href="https://swssubsea2.github.io/swsportal/" class="back-home">← Back to Homepage</a>
 
 </div>
 
@@ -153,20 +352,29 @@ All Controlled Documents
 
 <div class="container">
 
-<div class="card-custom">
+<div class="portal-layout">
 
-<input
-    type="text"
-    id="searchBox"
-    class="form-control"
-    placeholder="Search document..."
->
+    <main class="card-custom">
 
-<div class="stats mt-3" id="stats">
-Loading MDR...
-</div>
+        <input
+            type="text"
+            id="searchBox"
+            class="form-control"
+            placeholder="Search document..."
+        >
 
-<div id="content"></div>
+        <div class="stats mt-3" id="stats">
+            Loading documents...
+        </div>
+
+        <div id="content"></div>
+
+    </main>
+
+    <aside class="quick-access-panel">
+        <h2 class="quick-access-title">Quick Access</h2>
+        <div id="quickAccessList" class="quick-access-list"></div>
+    </aside>
 
 </div>
 
@@ -175,60 +383,184 @@ Loading MDR...
 
 <script>
 
-const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
+/*
+=========================================================
+HOW TO USE THIS FILE WITHOUT IIS
+=========================================================
 
-function jsonp(action, callbackName){
-    const old = document.getElementById(callbackName + "Script");
-    if(old) old.remove();
+Recommended server folder structure:
 
-    const script = document.createElement("script");
-    script.id = callbackName + "Script";
-    script.src = API_URL + "?action=" + encodeURIComponent(action) + "&callback=" + callbackName + "&t=" + Date.now();
-    script.onerror = function(){
-        document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
-    };
-    document.body.appendChild(script);
-}
+\\SERVER\SWS-HQ-Portal\
+│
+├── hq.html
+└── documents\
+    ├── HR\
+    │   ├── HR-01.pdf
+    │   └── HR-02.pdf
+    ├── Procurement\
+    │   └── PR-01.pdf
+    └── Quality\
+        └── QA-01.pdf
+
+For documents stored inside the same portal folder, use links like:
+
+documents/HR/HR-01.pdf
+
+You may also use a full server path, for example:
+
+\\SERVER\Quality\QA-01.pdf
+
+or a mapped drive path:
+
+Q:\1. HQ\1. QUALITY\1. PROCEDURES\QA-01.pdf
+
+To add, remove, or update documents, edit the documents array below.
+*/
+
+
+/*
+=========================================================
+QUICK ACCESS
+=========================================================
+Edit the items below to change the HQ Quick Access panel.
+
+image:
+- Use a direct image URL, or
+- Use a local image such as "images/quality-induction.png"
+
+link:
+- Website: https://...
+- Relative page/file: folder/file.html
+*/
+
+const quickAccessItems = [
+    {
+        title: "SWS Quality Induction",
+        description: "No description available.",
+        applicability: "Worksite & HQ",
+        owner: "Quality Department",
+        image: "https://dummyimage.com/240x160/ffffff/003e7e.png&text=SWS+QUALITY%0AINDUCTION",
+        link: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+        title: "Quality Dashboard",
+        description: "Open the latest SWS quality performance dashboard.",
+        applicability: "HQ",
+        owner: "Quality Department",
+        image: "",
+        link: "#"
+    },
+    {
+        title: "IMS Manual",
+        description: "Quick access to the current Integrated Management System Manual.",
+        applicability: "HQ",
+        owner: "QHSE Department",
+        image: "",
+        link: "#"
+    }
+];
+
+const documents = [
+    {
+        department: "HR",
+        docNo: "HR-01",
+        title: "HR Procedure",
+        type: "Procedure",
+        revNo: "0",
+        revDate: "24/06/2026",
+        storage: "Relative",
+        link: "Q:\\1. HQ\\1. QUALITY\\1. PROCEDURES\\QP-SWSPR-03 - Supplier Quality Audit (SQA) Rev 00.pdf",
+        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+        department: "HR",
+        docNo: "HR-02",
+        title: "Employment Procedure",
+        type: "Procedure",
+        revNo: "1",
+        revDate: "01/06/2026",
+        storage: "Server",
+        link: "\\\\SERVER\\HR\\HR-02.pdf",
+        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+        department: "Procurement",
+        docNo: "PR-01",
+        title: "Purchase Procedure",
+        type: "Procedure",
+        revNo: "1",
+        revDate: "08/01/2026",
+        storage: "Relative",
+        link: "documents/Procurement/PR-01.pdf",
+        videoLink: ""
+    },
+    {
+        department: "Quality",
+        docNo: "QA-01",
+        title: "Internal Audit Procedure",
+        type: "Procedure",
+        revNo: "0",
+        revDate: "10/06/2026",
+        storage: "Relative",
+        link: "documents/Quality/QA-01.pdf",
+        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    }
+];
 
 function safe(value){
-    return value ? String(value).trim() : '';
+    return value ? String(value).trim() : "";
 }
 
 function escapeHTML(value){
     return safe(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function encodePath(path){
+    return path
+        .split("/")
+        .map(part => encodeURIComponent(part))
+        .join("/");
 }
 
 function getDocumentLink(doc){
-    const storage = safe(doc.storage).toLowerCase();
     const link = safe(doc.link);
 
     if(!link){
-        return '#';
+        return "#";
     }
 
-    if(storage === 'server'){
-        if(link.startsWith('\\')){
-            return 'file://///' + link
-                .replace(/^\\+/, '')
-                .replaceAll('\\', '/')
-                .replaceAll(' ', '%20');
-        }
-
-        if(/^[A-Za-z]:\\/.test(link)){
-            return 'file:///' + link
-                .replaceAll('\\', '/')
-                .replaceAll(' ', '%20');
-        }
+    // Full web link
+    if(/^https?:\/\//i.test(link)){
+        return link;
     }
 
-    return link;
+    // UNC network path: \\SERVER\Folder\File.pdf
+    if(link.startsWith("\\\\")){
+        return "file://///" + link
+            .replace(/^\\+/, "")
+            .replaceAll("\\", "/")
+            .split("/")
+            .map(part => encodeURIComponent(part))
+            .join("/");
+    }
+
+    // Mapped drive path: Q:\Folder\File.pdf
+    if(/^[A-Za-z]:\\/.test(link)){
+        return "file:///" + link
+            .replaceAll("\\", "/")
+            .split("/")
+            .map(part => encodeURIComponent(part))
+            .join("/");
+    }
+
+    // Relative link inside the same server folder
+    return encodePath(link);
 }
-
 
 function getVideoLink(doc){
     return safe(doc.videoLink || doc.video || doc.youtubeLink);
@@ -238,7 +570,7 @@ function renderGuideButton(doc){
     const videoLink = getVideoLink(doc);
 
     if(!videoLink){
-        return '';
+        return "";
     }
 
     return `
@@ -253,11 +585,67 @@ function renderGuideButton(doc){
     `;
 }
 
+
+function renderQuickAccess(){
+    const container = document.getElementById("quickAccessList");
+
+    if(!quickAccessItems.length){
+        container.innerHTML = `
+            <div class="quick-access-empty">
+                No Quick Access item available.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = quickAccessItems.map(item => {
+        const image = safe(item.image);
+        const imageHTML = image
+            ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}">`
+            : `<span class="quick-access-placeholder">📄</span>`;
+
+        return `
+            <a
+                class="quick-access-card"
+                href="${escapeHTML(item.link || "#")}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="quick-access-image">
+                    ${imageHTML}
+                </div>
+
+                <div class="quick-access-content">
+                    <h3>${escapeHTML(item.title)}</h3>
+
+                    <div class="quick-access-description">
+                        ${escapeHTML(item.description || "No description available.")}
+                    </div>
+
+                    <div class="quick-access-meta">
+                        <div>
+                            <span>Applicability</span>
+                            <strong>${escapeHTML(item.applicability || "-")}</strong>
+                        </div>
+
+                        <div>
+                            <span>Owner</span>
+                            <strong>${escapeHTML(item.owner || "-")}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="quick-access-arrow">→</span>
+            </a>
+        `;
+    }).join("");
+}
+
 function renderDocuments(docs){
     const departments = {};
 
     docs.forEach(doc => {
-        const department = safe(doc.department) || 'Unassigned';
+        const department = safe(doc.department) || "Unassigned";
 
         if(!departments[department]){
             departments[department] = [];
@@ -266,108 +654,89 @@ function renderDocuments(docs){
         departments[department].push(doc);
     });
 
-    document.getElementById('stats').innerHTML =
-        docs.length + ' document(s) available';
+    document.getElementById("stats").innerHTML =
+        docs.length + " document(s) available";
 
-    let html = '';
+    let html = "";
 
-    Object.keys(departments).forEach(department => {
-
+    Object.keys(departments).sort().forEach(department => {
         html += `
-        <div class="department-header">
-            ${escapeHTML(department)}
-            (${departments[department].length})
-        </div>
+            <div class="department-header">
+                ${escapeHTML(department)}
+                (${departments[department].length})
+            </div>
 
-        <table class="table table-hover doc-table">
+            <table class="table table-hover doc-table">
+                <colgroup>
+                    <col class="col-docno">
+                    <col class="col-title">
+                    <col class="col-type">
+                    <col class="col-rev">
+                    <col class="col-date">
+                    <col class="col-open">
+                    <col class="col-guide">
+                </colgroup>
 
-        <colgroup>
-            <col class="col-docno">
-            <col class="col-title">
-            <col class="col-type">
-            <col class="col-rev">
-            <col class="col-date">
-            <col class="col-open">
-            <col class="col-guide">
-        </colgroup>
+                <thead>
+                    <tr>
+                        <th>Document No</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th class="text-center">Rev</th>
+                        <th>Rev Date</th>
+                        <th class="text-center">Open</th>
+                        <th class="text-center">Guide</th>
+                    </tr>
+                </thead>
 
-        <thead>
-        <tr>
-            <th>Document No</th>
-            <th>Title</th>
-            <th>Type</th>
-            <th class="text-center">Rev</th>
-            <th>Rev Date</th>
-            <th class="text-center">Open</th>
-            <th class="text-center">Guide</th>
-        </tr>
-        </thead>
-
-        <tbody>
+                <tbody>
         `;
 
         departments[department].forEach(doc => {
             html += `
-            <tr>
-                <td>${escapeHTML(doc.docNo)}</td>
-                <td>${escapeHTML(doc.title)}</td>
-                <td>${escapeHTML(doc.type)}</td>
-                <td class="text-center">${escapeHTML(doc.revNo)}</td>
-                <td>${escapeHTML(doc.revDate)}</td>
-                <td class="text-center">
-                    <a
-                        href="${getDocumentLink(doc)}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn btn-sm btn-open"
-                    >Open</a>
-                </td>
-                <td class="text-center">${renderGuideButton(doc)}</td>
-            </tr>
+                <tr>
+                    <td>${escapeHTML(doc.docNo)}</td>
+                    <td>${escapeHTML(doc.title)}</td>
+                    <td>${escapeHTML(doc.type)}</td>
+                    <td class="text-center">${escapeHTML(doc.revNo)}</td>
+                    <td>${escapeHTML(doc.revDate)}</td>
+                    <td class="text-center">
+                        <a
+                            href="${getDocumentLink(doc)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-sm btn-open"
+                        >Open</a>
+                    </td>
+                    <td class="text-center">${renderGuideButton(doc)}</td>
+                </tr>
             `;
         });
 
         html += `
-        </tbody>
-        </table>
+                </tbody>
+            </table>
         `;
-
     });
 
-    document.getElementById('content').innerHTML = html || 'No document found.';
+    document.getElementById("content").innerHTML =
+        html || "No document found.";
 }
 
-window.handleDocuments = function(response){
+function applySearch(){
+    const searchBox = document.getElementById("searchBox");
+    const search = safe(searchBox.value).toLowerCase();
 
-    if(!response || !response.success || !response.documents){
-        document.getElementById('stats').innerHTML = 'Error loading MDR from API.';
-        return;
-    }
-
-    let docs = response.documents;
-
-    
-
-    renderDocuments(docs);
-};
-
-jsonp('documents', 'handleDocuments');
-
-document.addEventListener('keyup', function(){
-
-    const searchBox = document.getElementById('searchBox');
-
-    if(!searchBox){
-        return;
-    }
-
-    const search = searchBox.value.toLowerCase();
-
-    document.querySelectorAll('tbody tr').forEach(row => {
-        row.style.display = row.innerText.toLowerCase().includes(search) ? '' : 'none';
+    document.querySelectorAll("tbody tr").forEach(row => {
+        row.style.display =
+            row.innerText.toLowerCase().includes(search) ? "" : "none";
     });
+}
 
-});
+document.getElementById("searchBox").addEventListener("input", applySearch);
+
+renderDocuments(documents);
+renderQuickAccess();
 
 </script>
 
