@@ -394,6 +394,8 @@ in all three HTML files, for example: 20260721-02.
 */
 const PORTAL_VERSION = "20260721-01";
 
+const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
+
 
 /*
 =========================================================
@@ -472,52 +474,26 @@ const quickAccessItems = [
     }
 ];
 
-const documents = [
-    {
-        department: "HR",
-        docNo: "HR-01",
-        title: "HR Procedure",
-        type: "Procedure",
-        revNo: "0",
-        revDate: "24/06/2026",
-        storage: "Relative",
-        link: "Q:\\1. HQ\\1. QUALITY\\1. PROCEDURES\\QP-SWSPR-03 - Supplier Quality Audit (SQA) Rev 00.pdf",
-        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-        department: "HR",
-        docNo: "HR-02",
-        title: "Employment Procedure",
-        type: "Procedure",
-        revNo: "1",
-        revDate: "01/06/2026",
-        storage: "Server",
-        link: "\\\\SERVER\\HR\\HR-02.pdf",
-        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-        department: "Procurement",
-        docNo: "PR-01",
-        title: "Purchase Procedure",
-        type: "Procedure",
-        revNo: "1",
-        revDate: "08/01/2026",
-        storage: "Relative",
-        link: "documents/Procurement/PR-01.pdf",
-        videoLink: ""
-    },
-    {
-        department: "Quality",
-        docNo: "QA-01",
-        title: "Internal Audit Procedure",
-        type: "Procedure",
-        revNo: "0",
-        revDate: "10/06/2026",
-        storage: "Relative",
-        link: "documents/Quality/QA-01.pdf",
-        videoLink: "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    }
-];
+
+
+function jsonp(action, callbackName){
+    const old = document.getElementById(callbackName + "Script");
+    if(old) old.remove();
+
+    const script = document.createElement("script");
+    script.id = callbackName + "Script";
+    script.src = API_URL
+        + "?action=" + encodeURIComponent(action)
+        + "&callback=" + callbackName
+        + "&t=" + Date.now();
+
+    script.onerror = function(){
+        document.getElementById("stats").innerHTML =
+            "Error loading documents from API.";
+    };
+
+    document.body.appendChild(script);
+}
 
 function safe(value){
     return value ? String(value).trim() : "";
@@ -745,10 +721,22 @@ function applySearch(){
     });
 }
 
+window.handleDocuments = function(response){
+    if(!response || !response.success || !response.documents){
+        document.getElementById("stats").innerHTML =
+            "Error loading documents from API.";
+        return;
+    }
+
+    // HQ displays every Active document returned by the API.
+    // No filtering is applied to applicableToWorksite.
+    renderDocuments(response.documents);
+};
+
 document.getElementById("searchBox").addEventListener("input", applySearch);
 
-renderDocuments(documents);
 renderQuickAccess();
+jsonp("documents", "handleDocuments");
 
 </script>
 
