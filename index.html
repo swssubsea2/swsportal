@@ -502,7 +502,7 @@ body{
 }
 
 
-/* HQ PASSWORD & SERVER ACCESS MODAL */
+/* HQ PASSWORD ACCESS MODAL */
 .hq-modal{
     position:fixed;
     inset:0;
@@ -885,35 +885,13 @@ body{
         <div class="hq-modal-header">
             <div>
                 <h3 id="hqModalTitle">HQ Portal Access</h3>
-                <p>Choose how you want to access HQ documents.</p>
+                <p>Enter the HQ access password to continue.</p>
             </div>
             <button type="button" class="hq-modal-close" onclick="closeHQModal()" aria-label="Close">×</button>
         </div>
 
         <div class="hq-modal-body">
-
-            <div id="hqChoiceStep">
-                <h4 class="hq-choice-title">Choose how to continue</h4>
-                <p class="hq-choice-text">
-                    Open the HQ webpage or access the company file server.
-                </p>
-
-                <div class="hq-choice-grid">
-                    <button type="button" class="hq-choice" onclick="showHQPassword()">
-                        <span class="hq-choice-icon">🌐</span>
-                        <strong>Open HQ Portal</strong>
-                        <small>Enter the password before opening the HQ webpage.</small>
-                    </button>
-
-                    <button type="button" class="hq-choice" onclick="showServerAccess()">
-                        <span class="hq-choice-icon">📁</span>
-                        <strong>File Server</strong>
-                        <small>View and copy the company server location.</small>
-                    </button>
-                </div>
-            </div>
-
-            <div id="hqLoginStep" hidden>
+            <div id="hqLoginStep">
                 <h4 class="hq-choice-title">HQ Portal Password</h4>
                 <p class="hq-choice-text">
                     Enter the HQ access password to continue.
@@ -935,31 +913,6 @@ body{
                 </div>
 
                 <div id="hqPasswordError" class="hq-error"></div>
-
-                <button type="button" class="hq-secondary-btn" onclick="backToHQChoice()">
-                    Back
-                </button>
-            </div>
-
-            <div id="hqServerStep" hidden>
-                <h4 class="hq-choice-title">Company File Server</h4>
-                <p class="hq-choice-text">
-                    Copy this path and paste it into Windows File Explorer.
-                </p>
-
-                <div id="serverPathText" class="server-path-box">\\192.168.0.170\SWS-Document-Portal</div>
-
-                <button type="button" class="hq-primary-btn" onclick="copyServerPath()">
-                    Copy Server Path
-                </button>
-
-                <button type="button" class="hq-secondary-btn" onclick="backToHQChoice()">
-                    Back
-                </button>
-
-                <p id="copyStatus" class="hq-note">
-                    The server is available only when connected to the company network or approved VPN.
-                </p>
             </div>
         </div>
     </div>
@@ -983,16 +936,17 @@ const PORTAL_VERSION = "20260721-01";
 
 const HQ_PASSWORD = "SWS00";
 const HQ_PAGE = "hq.html?v=20260721-01";
-const HQ_SERVER_PATH = "\\\\192.168.0.170\\SWS-Document-Portal";
 
 function openHQLogin(){
     const modal = document.getElementById("hqModal");
-    const passwordInput = document.getElementById("hqPassword");
 
     resetHQModal();
     modal.classList.add("show");
     document.body.style.overflow = "hidden";
 
+    setTimeout(() => {
+        document.getElementById("hqPassword").focus();
+    }, 50);
 }
 
 function closeHQModal(){
@@ -1002,13 +956,8 @@ function closeHQModal(){
 }
 
 function resetHQModal(){
-    document.getElementById("hqChoiceStep").hidden = false;
-    document.getElementById("hqLoginStep").hidden = true;
-    document.getElementById("hqServerStep").hidden = true;
     document.getElementById("hqPassword").value = "";
     document.getElementById("hqPasswordError").textContent = "";
-    document.getElementById("copyStatus").textContent =
-        "The server is available only when connected to the company network or approved VPN.";
 }
 
 function checkHQPassword(){
@@ -1023,53 +972,6 @@ function checkHQPassword(){
 
     errorBox.textContent = "Incorrect password. Please try again.";
     document.getElementById("hqPassword").select();
-}
-
-function showHQPassword(){
-    document.getElementById("hqChoiceStep").hidden = true;
-    document.getElementById("hqServerStep").hidden = true;
-    document.getElementById("hqLoginStep").hidden = false;
-
-    setTimeout(() => {
-        document.getElementById("hqPassword").focus();
-    }, 50);
-}
-
-function openHQPortal(){
-    showHQPassword();
-}
-
-function showServerAccess(){
-    document.getElementById("hqChoiceStep").hidden = true;
-    document.getElementById("hqServerStep").hidden = false;
-    document.getElementById("serverPathText").textContent = HQ_SERVER_PATH;
-}
-
-function backToHQChoice(){
-    document.getElementById("hqLoginStep").hidden = true;
-    document.getElementById("hqServerStep").hidden = true;
-    document.getElementById("hqChoiceStep").hidden = false;
-    document.getElementById("hqPasswordError").textContent = "";
-}
-
-async function copyServerPath(){
-    const status = document.getElementById("copyStatus");
-
-    try{
-        await navigator.clipboard.writeText(HQ_SERVER_PATH);
-        status.textContent = "Server path copied. Open File Explorer, paste it into the address bar, then press Enter.";
-    }catch(error){
-        const temporaryInput = document.createElement("textarea");
-        temporaryInput.value = HQ_SERVER_PATH;
-        temporaryInput.style.position = "fixed";
-        temporaryInput.style.opacity = "0";
-        document.body.appendChild(temporaryInput);
-        temporaryInput.select();
-        document.execCommand("copy");
-        temporaryInput.remove();
-
-        status.textContent = "Server path copied. Open File Explorer, paste it into the address bar, then press Enter.";
-    }
 }
 
 document.getElementById("hqPassword").addEventListener("keydown", function(event){
