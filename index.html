@@ -11,7 +11,7 @@
 <title>SWS Document Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
+<script type="text/javascript" src="https://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=wQu-d78NKeXsDuZQwN22RN4ZbTwEslPxZa5dShFOXmSkwR_4cvRRLAFklkYYtuM7DBRAM7bnEIC234RC4lc-zezWtNlYc5L-I1uNvMQq9MOafbDT1wPdlIJrSHbtuM-h_DK_-M4WfpmeV6gmbww10n8yg9_t8jx1qbydztHlt7rpqB2uvAQVEldy2RwSM5NLyYNsiZognXuYNXinm7sRCrpoK0YTS9LfnAoLkau7OUUQ7oX-Qw9vYOEmAYZ1Aru1t7QEcPafj6yfGp4O6eQG9kU_CvesfHfR6xAz43o5KR2PUllAymdUetW_lzCf9B5a" charset="UTF-8"></script><style>
 *{
     margin:0;
     padding:0;
@@ -995,17 +995,94 @@ document.addEventListener("keydown", function(event){
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
 
+const jsonpTimers = {};
+const jsonpAttempts = {};
+
 function jsonp(action, callbackName){
-    const old = document.getElementById(callbackName);
+    const scriptId = callbackName + "Script";
+    const old = document.getElementById(scriptId);
     if(old) old.remove();
 
+    if(!jsonpAttempts[callbackName]){
+        jsonpAttempts[callbackName] = 0;
+    }
+
+    jsonpAttempts[callbackName] += 1;
+
     const script = document.createElement("script");
-    script.id = callbackName;
-    script.src = API_URL + "?action=" + encodeURIComponent(action) + "&callback=" + callbackName + "&t=" + Date.now();
-    script.onerror = function(){
-        console.log("Failed loading", action);
+    script.id = scriptId;
+    script.src =
+        API_URL
+        + "?action=" + encodeURIComponent(action)
+        + "&callback=" + encodeURIComponent(callbackName)
+        + "&t=" + Date.now();
+
+    const fail = function(){
+        clearTimeout(jsonpTimers[callbackName]);
+
+        if(jsonpAttempts[callbackName] < 3){
+            setTimeout(() => jsonp(action, callbackName), 1500);
+            return;
+        }
+
+        showApiLoadError(action);
     };
+
+    script.onerror = fail;
+
+    jsonpTimers[callbackName] = setTimeout(fail, 12000);
+
     document.body.appendChild(script);
+}
+
+function markJsonpLoaded(callbackName){
+    clearTimeout(jsonpTimers[callbackName]);
+    jsonpAttempts[callbackName] = 0;
+
+    const script = document.getElementById(callbackName + "Script");
+    if(script){
+        script.remove();
+    }
+}
+
+function showApiLoadError(action){
+    if(action === "ticker"){
+        const container = document.getElementById("tickerContainer");
+        if(container){
+            container.innerHTML =
+                'Announcements could not be loaded. '
+                + '<button type="button" onclick="retryApi(\'ticker\',\'handleTicker\')" '
+                + 'style="border:0;background:transparent;color:white;text-decoration:underline;cursor:pointer;">Retry</button>';
+        }
+        return;
+    }
+
+    const fallbackMap = {
+        latest: ["latestUpdatesContainer", "<li>Latest updates could not be loaded.</li>"],
+        quick: ["quickAccessContainer", '<div class="quick-access-empty">Quick Access could not be loaded.</div>'],
+        campaign: ["campaignContainer", "Campaign information could not be loaded."]
+    };
+
+    const fallback = fallbackMap[action];
+    if(fallback){
+        const container = document.getElementById(fallback[0]);
+        if(container){
+            container.innerHTML = fallback[1];
+        }
+    }
+}
+
+function retryApi(action, callbackName){
+    jsonpAttempts[callbackName] = 0;
+
+    if(action === "ticker"){
+        const container = document.getElementById("tickerContainer");
+        if(container){
+            container.textContent = "Loading announcements...";
+        }
+    }
+
+    jsonp(action, callbackName);
 }
 
 function convertGoogleDriveLink(url){
@@ -1022,6 +1099,7 @@ function openLink(url){
 }
 
 window.handleLatest = function(response){
+    markJsonpLoaded("handleLatest");
     const container = document.getElementById("latestUpdatesContainer");
     if(!container) return;
 
@@ -1036,6 +1114,7 @@ window.handleLatest = function(response){
 };
 
 window.handleQuick = function(response){
+    markJsonpLoaded("handleQuick");
     const container = document.getElementById("quickAccessContainer");
 
     if(!container){
@@ -1127,6 +1206,7 @@ window.handleQuick = function(response){
 };
 
 window.handleCampaign = function(response){
+    markJsonpLoaded("handleCampaign");
     const container = document.getElementById("campaignContainer");
     if(!container) return;
 
@@ -1148,6 +1228,7 @@ window.handleCampaign = function(response){
 };
 
 window.handleTicker = function(response){
+    markJsonpLoaded("handleTicker");
     const container = document.getElementById("tickerContainer");
     if(!container) return;
 
