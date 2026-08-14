@@ -452,85 +452,52 @@ const quickAccessItems = [
     }
 ];
 
-const jsonpState = {};
+async function loadDocuments(){
+    const stats = document.getElementById("stats");
 
-function jsonp(action, callbackName){
-    if(!jsonpState[callbackName]){
-        jsonpState[callbackName] = { attempts:0, timer:null };
-    }
+    try{
+        stats.textContent = "Loading MDR...";
 
-    const state = jsonpState[callbackName];
-    state.attempts += 1;
+        const response = await fetch(
+            "documents.json?t=" + Date.now(),
+            {
+                cache: "no-store"
+            }
+        );
 
-    const scriptId = callbackName + "Script";
-    const old = document.getElementById(scriptId);
-    if(old) old.remove();
-
-    clearTimeout(state.timer);
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src =
-        API_URL
-        + "?action=" + encodeURIComponent(action)
-        + "&callback=" + encodeURIComponent(callbackName)
-        + "&t=" + Date.now();
-
-    const retryOrFail = function(){
-        clearTimeout(state.timer);
-
-        const currentScript = document.getElementById(scriptId);
-        if(currentScript) currentScript.remove();
-
-        if(state.attempts < 3){
-            document.getElementById("stats").innerHTML =
-                "Connecting to document API... retry "
-                + (state.attempts + 1)
-                + " of 3";
-
-            setTimeout(function(){
-                jsonp(action, callbackName);
-            }, 1500);
-
-            return;
+        if(!response.ok){
+            throw new Error("HTTP " + response.status);
         }
 
-        document.getElementById("stats").innerHTML = `
-            Unable to connect to MDR API.
+        const data = await response.json();
+
+        if(
+            !data ||
+            !data.success ||
+            !Array.isArray(data.documents)
+        ){
+            throw new Error("Invalid documents.json");
+        }
+
+        const docs = data.documents.filter(doc =>
+            safe(doc.applicableToWorksite).toLowerCase() === "yes"
+        );
+
+        renderDocuments(docs);
+    }catch(error){
+        console.error("MDR load error:", error);
+
+        stats.innerHTML = `
+            Unable to load MDR.
             <button
                 type="button"
                 class="btn btn-sm btn-outline-primary ms-2"
-                onclick="retryDocuments()"
-            >Retry</button>
+                onclick="loadDocuments()"
+            >
+                Retry
+            </button>
         `;
-    };
-
-    script.onerror = retryOrFail;
-    state.timer = setTimeout(retryOrFail, 12000);
-
-    document.body.appendChild(script);
-}
-
-function markJsonpLoaded(callbackName){
-    const state = jsonpState[callbackName];
-
-    if(state){
-        clearTimeout(state.timer);
-        state.attempts = 0;
     }
-
-    const script = document.getElementById(callbackName + "Script");
-    if(script) script.remove();
-}
-
-function retryDocuments(){
-    if(jsonpState.handleDocuments){
-        clearTimeout(jsonpState.handleDocuments.timer);
-        jsonpState.handleDocuments.attempts = 0;
-    }
-
-    document.getElementById("stats").innerHTML = "Loading documents...";
-    jsonp("documents", "handleDocuments");
 }
 
 function safe(value){
@@ -547,26 +514,10 @@ function escapeHTML(value){
 }
 
 function getDocumentLink(doc){
-    const storage = safe(doc.storage).toLowerCase();
     const link = safe(doc.link);
 
     if(!link){
-        return '#';
-    }
-
-    if(storage === 'server'){
-        if(link.startsWith('\\')){
-            return 'file://///' + link
-                .replace(/^\\+/, '')
-                .replaceAll('\\', '/')
-                .replaceAll(' ', '%20');
-        }
-
-        if(/^[A-Za-z]:\\/.test(link)){
-            return 'file:///' + link
-                .replaceAll('\\', '/')
-                .replaceAll(' ', '%20');
-        }
+        return "#";
     }
 
     return link;
@@ -734,25 +685,7 @@ function renderDocuments(docs){
         html || 'No document found.';
 }
 
-window.handleDocuments = function(response){
-    markJsonpLoaded("handleDocuments");
-
-    if(!response || !response.success || !response.documents){
-        document.getElementById('stats').innerHTML =
-            'Error loading MDR from API.';
-        return;
-    }
-
-    let docs = response.documents;
-
-    docs = docs.filter(doc =>
-        safe(doc.applicableToWorksite).toLowerCase() === 'yes'
-    );
-
-    renderDocuments(docs);
-};
-
-jsonp('documents', 'handleDocuments');
+loadDocuments();
 
 document.getElementById('searchBox').addEventListener('input', function(){
     const search = safe(this.value).toLowerCase();

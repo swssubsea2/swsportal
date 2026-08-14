@@ -1,0 +1,91 @@
+name: Sync SWS Documents
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 15 minutes.
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest document list
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          API_URL="https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec?action=documents_json"
+
+          curl \
+            --location \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 3 \
+            --retry-delay 2 \
+            "${API_URL}&t=$(date +%s)" \
+            --output documents.download.json
+
+      - name: Validate and format JSON
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          src = Path("documents.download.json")
+          dst = Path("documents.json")
+
+          data = json.loads(src.read_text(encoding="utf-8"))
+
+          if not isinstance(data, dict):
+              raise SystemExit("API response is not a JSON object.")
+
+          if data.get("success") is not True:
+              raise SystemExit("API response success is not true.")
+
+          documents = data.get("documents")
+
+          if not isinstance(documents, list):
+              raise SystemExit("API response documents is not a list.")
+
+          dst.write_text(
+              json.dumps(
+                  data,
+                  indent=2,
+                  ensure_ascii=False
+              ) + "\n",
+              encoding="utf-8"
+          )
+
+          print(
+              f"Validated {len(documents)} document(s)."
+          )
+
+      - name: Remove temporary download
+        run: rm -f documents.download.json
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "SWS Document Sync"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add documents.json
+
+          if git diff --cached --quiet; then
+            echo "No document changes."
+            exit 0
+          fi
+
+          git commit -m "Auto-sync SWS document list"
+          git push

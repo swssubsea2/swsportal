@@ -476,85 +476,48 @@ const quickAccessItems = [
 
 
 
-const jsonpState = {};
+async function loadDocuments(){
+    const stats = document.getElementById("stats");
 
-function jsonp(action, callbackName){
-    if(!jsonpState[callbackName]){
-        jsonpState[callbackName] = { attempts:0, timer:null };
-    }
+    try{
+        stats.textContent = "Loading documents...";
 
-    const state = jsonpState[callbackName];
-    state.attempts += 1;
+        const response = await fetch(
+            "documents.json?t=" + Date.now(),
+            {
+                cache: "no-store"
+            }
+        );
 
-    const scriptId = callbackName + "Script";
-    const old = document.getElementById(scriptId);
-    if(old) old.remove();
-
-    clearTimeout(state.timer);
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src =
-        API_URL
-        + "?action=" + encodeURIComponent(action)
-        + "&callback=" + encodeURIComponent(callbackName)
-        + "&t=" + Date.now();
-
-    const retryOrFail = function(){
-        clearTimeout(state.timer);
-
-        const currentScript = document.getElementById(scriptId);
-        if(currentScript) currentScript.remove();
-
-        if(state.attempts < 3){
-            document.getElementById("stats").innerHTML =
-                "Connecting to document API... retry "
-                + (state.attempts + 1)
-                + " of 3";
-
-            setTimeout(function(){
-                jsonp(action, callbackName);
-            }, 1500);
-
-            return;
+        if(!response.ok){
+            throw new Error("HTTP " + response.status);
         }
 
-        document.getElementById("stats").innerHTML = `
-            Unable to connect to document API.
+        const data = await response.json();
+
+        if(
+            !data ||
+            !data.success ||
+            !Array.isArray(data.documents)
+        ){
+            throw new Error("Invalid documents.json");
+        }
+
+        renderDocuments(data.documents);
+    }catch(error){
+        console.error("Document load error:", error);
+
+        stats.innerHTML = `
+            Unable to load document list.
             <button
                 type="button"
                 class="btn btn-sm btn-outline-primary ms-2"
-                onclick="retryDocuments()"
-            >Retry</button>
+                onclick="loadDocuments()"
+            >
+                Retry
+            </button>
         `;
-    };
-
-    script.onerror = retryOrFail;
-    state.timer = setTimeout(retryOrFail, 12000);
-
-    document.body.appendChild(script);
-}
-
-function markJsonpLoaded(callbackName){
-    const state = jsonpState[callbackName];
-
-    if(state){
-        clearTimeout(state.timer);
-        state.attempts = 0;
     }
-
-    const script = document.getElementById(callbackName + "Script");
-    if(script) script.remove();
-}
-
-function retryDocuments(){
-    if(jsonpState.handleDocuments){
-        clearTimeout(jsonpState.handleDocuments.timer);
-        jsonpState.handleDocuments.attempts = 0;
-    }
-
-    document.getElementById("stats").innerHTML = "Loading documents...";
-    jsonp("documents", "handleDocuments");
 }
 
 function safe(value){
@@ -783,23 +746,10 @@ function applySearch(){
     });
 }
 
-window.handleDocuments = function(response){
-    markJsonpLoaded("handleDocuments");
-    if(!response || !response.success || !response.documents){
-        document.getElementById("stats").innerHTML =
-            "Error loading documents from API.";
-        return;
-    }
-
-    // HQ displays every Active document returned by the API.
-    // No filtering is applied to applicableToWorksite.
-    renderDocuments(response.documents);
-};
-
 document.getElementById("searchBox").addEventListener("input", applySearch);
 
 renderQuickAccess();
-jsonp("documents", "handleDocuments");
+loadDocuments();
 
 </script>
 
