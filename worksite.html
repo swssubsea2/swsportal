@@ -730,8 +730,10 @@ async function loadPortalData(){
         );
 
         renderCampaign(
-            Array.isArray(data.campaign) ? data.campaign : []
-        );
+    		Array.isArray(data.worksiteCampaign)
+        		? data.worksiteCampaign
+        		: []
+	);
 
         const docs = data.documents.filter(doc =>
             safe(doc.applicableToWorksite).toLowerCase() === "yes"
