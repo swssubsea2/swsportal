@@ -6,88 +6,113 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260721-01">
 
 <title>SWS Document Portal</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<script type="text/javascript" src="https://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=wQu-d78NKeXsDuZQwN22RN4ZbTwEslPxZa5dShFOXmSkwR_4cvRRLAFklkYYtuM7DBRAM7bnEIC234RC4lc-zezWtNlYc5L-I1uNvMQq9MOafbDT1wPdlIJrSHbtuM-h_DK_-M4WfpmeV6gmbww10n8yg9_t8jx1qbydztHlt7rpqB2uvAQVEldy2RwSM5NLyYNsiZognXuYNXinm7sRCrpoK0YTS9LfnAoLkau7OUUQ7oX-Qw9vYOEmAYZ1Aru1t7QEcPafj6yfGp4O6eQG9kU_CvesfHfR6xAz43o5KR2PUllAymdUetW_lzCf9B5a" charset="UTF-8"></script><style>
+<style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
     font-family:'Inter',sans-serif;
-    background:#f5f7fa;
+    background:#071f3a;
     color:#111827;
 }
 
-/* HEADER */
+/* =====================================================
+   HEADER
+===================================================== */
+
 .header{
-    height:80px;
+    height:64px;
     background:#ffffff;
     border-bottom:1px solid #e5e7eb;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0 40px;
+    padding:0 24px;
+    position:relative;
+    z-index:10;
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:12px;
+    min-width:0;
 }
 
 .logo img{
-    height:55px;
+    height:46px;
+    width:auto;
 }
 
 .portal-title{
-    font-size:22px;
+    font-size:17px;
     font-weight:600;
     color:#003E7E;
+    white-space:nowrap;
 }
 
 .portal-subtitle{
-    font-size:12px;
+    margin-top:2px;
+    font-size:10px;
     color:#6b7280;
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:12px;
 }
 
 .admin-btn{
     background:#003E7E;
     color:white;
     text-decoration:none;
-    padding:10px 18px;
+    padding:8px 15px;
     border-radius:30px;
-    font-size:14px;
+    font-size:12px;
     font-weight:600;
     white-space:nowrap;
-    box-shadow:0 6px 16px rgba(0,62,126,.18);
-    transition:.25s;
+    box-shadow:0 5px 14px rgba(0,62,126,.18);
+    transition:.2s;
 }
 
 .admin-btn:hover{
     background:#002a55;
-    transform:translateY(-2px);
+    transform:translateY(-1px);
+}
+
+
+/* =====================================================
+   DESKTOP SINGLE-SCREEN LAYOUT
+===================================================== */
+
+.page{
+    min-height:calc(100vh - 64px);
+    display:flex;
+    flex-direction:column;
 }
 
 /* HERO */
 .hero{
-    min-height:520px;
+    flex:0 0 42vh;
+    min-height:300px;
+    max-height:460px;
+
     background:
-    linear-gradient(rgba(0,0,0,.60), rgba(0,0,0,.60)),
-    url('hero.jpg');
+        linear-gradient(rgba(1,22,45,.58), rgba(1,22,45,.64)),
+        url('hero.jpg');
+
     background-size:cover;
-    background-position:center;
+    background-position:center 52%;
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -96,123 +121,93 @@ body{
 }
 
 .hero-content{
-    max-width:900px;
+    width:min(900px,90%);
     padding:20px;
 }
 
 .hero-content h1{
-    font-size:72px;
+    font-size:clamp(42px,4.2vw,68px);
     font-weight:300;
-    margin-bottom:15px;
+    line-height:1.05;
+    margin-bottom:16px;
 }
 
 .hero-content p{
-    font-size:20px;
-    opacity:.9;
-    line-height:1.7;
+    max-width:760px;
+    margin:auto;
+    font-size:clamp(13px,1.05vw,17px);
+    opacity:.94;
+    line-height:1.65;
 }
 
-/* NEWS TICKER */
-.ticker{
-    height:42px;
-    background:#30567C;
-    color:white;
-    overflow:hidden;
-    white-space:nowrap;
-}
 
-.ticker span{
-    display:inline-block;
-    line-height:42px;
-    padding-left:100%;
-    animation:ticker 30s linear infinite;
-}
-
-@keyframes ticker{
-    0%{ transform:translateX(0); }
-    100%{ transform:translateX(-100%); }
-}
-
-/* PORTAL SPOTLIGHT SECTION */
+/* PORTAL ACCESS */
 .portal-section{
-    position:relative;
-    padding:85px 20px 95px;
-    background:
-        radial-gradient(circle at top left, rgba(59,130,246,.35), transparent 34%),
-        linear-gradient(135deg, #002B57 0%, #003E7E 48%, #071426 100%);
-    overflow:hidden;
-}
+    flex:1 1 auto;
+    min-height:0;
 
-.portal-section::before{
-    content:"";
-    position:absolute;
-    inset:24px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:26px;
-    pointer-events:none;
+    background:
+        radial-gradient(circle at 8% 0%, rgba(59,130,246,.23), transparent 30%),
+        linear-gradient(135deg,#173f78 0%,#0c3768 48%,#071f3a 100%);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px 28px 30px;
 }
 
 .portal-container{
-    position:relative;
-    max-width:1180px;
-    margin:auto;
-    z-index:1;
+    width:min(1060px,100%);
 }
 
 .spotlight-label{
     width:max-content;
-    margin:0 auto 18px;
-    padding:8px 18px;
-    border:1px solid rgba(255,255,255,.25);
+    margin:0 auto 9px;
+    padding:6px 14px;
+    border:1px solid rgba(255,255,255,.23);
     border-radius:30px;
     color:#dbeafe;
-    font-size:13px;
-    letter-spacing:.08em;
+    font-size:10px;
+    letter-spacing:.09em;
     text-transform:uppercase;
 }
 
 .section-title{
     text-align:center;
-    font-size:46px;
+    font-size:clamp(26px,2.2vw,38px);
+    line-height:1.1;
     font-weight:300;
     color:white;
-}
-
-.section-subtitle{
-    text-align:center;
-    color:#dbeafe;
-    margin-top:12px;
-    margin-bottom:45px;
-    font-size:17px;
+    margin-bottom:22px;
 }
 
 .portal-grid-main{
     display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:26px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
 }
 
 .portal-row{
     position:relative;
-    background:rgba(255,255,255,.96);
-    border-radius:24px;
-    box-shadow:0 24px 60px rgba(0,0,0,.22);
-    padding:38px;
-    min-height:300px;
+    background:rgba(255,255,255,.97);
+    border-radius:18px;
+    padding:24px 26px;
+    min-height:205px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    transition:.3s;
+    box-shadow:0 18px 48px rgba(0,0,0,.20);
     overflow:hidden;
+    transition:.25s ease;
 }
 
 .portal-row::before{
     content:"";
     position:absolute;
-    top:0;
     left:0;
+    top:0;
     width:100%;
-    height:7px;
+    height:5px;
 }
 
 .portal-row.hq::before{
@@ -224,48 +219,54 @@ body{
 }
 
 .portal-row:hover{
-    transform:translateY(-7px);
-    box-shadow:0 30px 70px rgba(0,0,0,.28);
+    transform:translateY(-4px);
+    box-shadow:0 24px 55px rgba(0,0,0,.25);
+}
+
+.portal-top{
+    display:flex;
+    align-items:flex-start;
+    gap:17px;
 }
 
 .portal-icon{
-    width:76px;
-    height:76px;
-    border-radius:22px;
+    flex:0 0 54px;
+    width:54px;
+    height:54px;
+    border-radius:15px;
     background:#eef4ff;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:36px;
-    margin-bottom:24px;
+    font-size:26px;
 }
 
 .portal-info h3{
-    font-size:34px;
+    font-size:25px;
     color:#003E7E;
-    margin-bottom:14px;
+    margin:2px 0 8px;
     font-weight:500;
 }
 
 .portal-info p{
     color:#4b5563;
-    line-height:1.75;
-    max-width:100%;
-    font-size:15px;
+    line-height:1.55;
+    font-size:12px;
 }
 
 .portal-btn{
-    margin-top:28px;
+    margin-top:18px;
 }
 
 .portal-btn a{
+    display:inline-block;
     background:#003E7E;
     color:white;
     text-decoration:none;
-    padding:14px 28px;
-    border-radius:30px;
+    padding:10px 17px;
+    border-radius:24px;
+    font-size:12px;
     font-weight:600;
-    display:inline-block;
 }
 
 .portal-btn a:hover{
@@ -280,229 +281,11 @@ body{
     background:#006edc;
 }
 
-/* CONTENT SECTIONS */
-.content-container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 20px;
-}
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    margin-bottom:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
+/* =====================================================
+   HQ PASSWORD MODAL
+===================================================== */
 
-.card-title{
-    font-size:32px;
-    font-weight:300;
-    color:#003E7E;
-    margin-bottom:20px;
-}
-
-/* LATEST UPDATES */
-.updates-list{
-    list-style:none;
-}
-
-.updates-list li{
-    padding:14px 0;
-    border-bottom:1px solid #e5e7eb;
-    color:#374151;
-}
-
-.updates-list li:last-child{
-    border-bottom:none;
-}
-
-/* QUICK ACCESS */
-.quick-access-list{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-}
-
-.quick-access-card{
-    display:grid;
-    grid-template-columns:180px minmax(0,1fr) 180px 180px 54px;
-    gap:20px;
-    align-items:center;
-    padding:20px;
-    background:linear-gradient(135deg, rgba(238,244,255,.95), rgba(255,255,255,.98));
-    border:1px solid #dbe7f5;
-    border-radius:22px;
-    box-shadow:0 10px 28px rgba(0,62,126,.08);
-    transition:.25s ease;
-}
-
-.quick-access-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 40px rgba(0,62,126,.14);
-    border-color:#b8d0ee;
-}
-
-.quick-access-logo-wrap{
-    min-height:120px;
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:16px;
-    text-decoration:none;
-}
-
-.quick-access-logo{
-    max-width:135px;
-    max-height:82px;
-    object-fit:contain;
-}
-
-.quick-access-fallback{
-    width:62px;
-    height:62px;
-    border-radius:18px;
-    background:#003E7E;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:600;
-}
-
-.quick-access-main{
-    min-width:0;
-}
-
-.quick-access-name{
-    color:#003E7E;
-    font-size:20px;
-    font-weight:600;
-    margin-bottom:8px;
-}
-
-.quick-access-description{
-    color:#4b5563;
-    line-height:1.65;
-    font-size:14px;
-}
-
-.quick-access-meta{
-    min-height:82px;
-    padding:16px;
-    border-left:1px solid #dbe7f5;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.quick-access-meta-label{
-    color:#6b7280;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    margin-bottom:7px;
-}
-
-.quick-access-meta-value{
-    color:#111827;
-    font-size:14px;
-    line-height:1.45;
-}
-
-.quick-access-open{
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    background:#003E7E;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    font-size:22px;
-    box-shadow:0 8px 18px rgba(0,62,126,.22);
-    transition:.25s;
-}
-
-.quick-access-open:hover{
-    background:#002a55;
-    color:white;
-    transform:translateX(3px);
-}
-
-.quick-access-empty{
-    padding:28px;
-    text-align:center;
-    color:#6b7280;
-    background:#f7f9fc;
-    border:1px dashed #cbd5e1;
-    border-radius:16px;
-}
-
-.stat-number{
-    color:#003E7E;
-    font-weight:600;
-}
-
-/* CAMPAIGN */
-
-.campaign-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:25px;
-}
-
-.campaign-card{
-    background:#f7f9fc;
-    border:1px solid #e5e7eb;
-    border-radius:16px;
-    padding:18px;
-    text-align:center;
-}
-
-.campaign-card img{
-    width:100%;
-    max-height:520px;
-    object-fit:contain;
-    border-radius:12px;
-    background:white;
-}
-
-.campaign-card h3{
-    margin-top:15px;
-    color:#003E7E;
-    font-size:18px;
-}
-
-.campaign-card p{
-    margin-top:8px;
-    color:#374151;
-    font-size:14px;
-    line-height:1.6;
-}
-
-/* FOOTER */
-.footer{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:35px;
-    margin-top:40px;
-}
-
-.footer p{
-    opacity:.8;
-    margin:5px 0;
-}
-
-
-/* HQ PASSWORD ACCESS MODAL */
 .hq-modal{
     position:fixed;
     inset:0;
@@ -519,23 +302,23 @@ body{
 }
 
 .hq-modal-card{
-    width:min(520px, 100%);
+    width:min(500px,100%);
     background:#ffffff;
-    border-radius:22px;
+    border-radius:20px;
     box-shadow:0 28px 80px rgba(0,0,0,.30);
     overflow:hidden;
     animation:modalIn .2s ease;
 }
 
 @keyframes modalIn{
-    from{opacity:0; transform:translateY(12px) scale(.98);}
-    to{opacity:1; transform:translateY(0) scale(1);}
+    from{opacity:0;transform:translateY(12px) scale(.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
 }
 
 .hq-modal-header{
     background:linear-gradient(135deg,#002B57,#003E7E);
     color:white;
-    padding:25px 28px;
+    padding:23px 26px;
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
@@ -543,37 +326,50 @@ body{
 }
 
 .hq-modal-header h3{
-    font-size:24px;
+    font-size:22px;
     margin-bottom:6px;
 }
 
 .hq-modal-header p{
     color:#dbeafe;
-    font-size:13px;
-    line-height:1.55;
+    font-size:12px;
+    line-height:1.5;
 }
 
 .hq-modal-close{
     border:0;
     background:rgba(255,255,255,.14);
     color:white;
-    width:36px;
-    height:36px;
+    width:34px;
+    height:34px;
     border-radius:50%;
     cursor:pointer;
-    font-size:22px;
+    font-size:20px;
 }
 
 .hq-modal-body{
-    padding:28px;
+    padding:26px;
+}
+
+.hq-choice-title{
+    color:#003E7E;
+    font-size:20px;
+    margin-bottom:7px;
+}
+
+.hq-choice-text{
+    color:#4b5563;
+    line-height:1.55;
+    font-size:13px;
+    margin-bottom:17px;
 }
 
 .hq-field-label{
     display:block;
     color:#374151;
-    font-size:13px;
+    font-size:12px;
     font-weight:600;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .hq-password-row{
@@ -585,8 +381,8 @@ body{
     flex:1;
     min-width:0;
     border:1px solid #cbd5e1;
-    border-radius:12px;
-    padding:13px 14px;
+    border-radius:11px;
+    padding:12px 13px;
     font:inherit;
     outline:none;
 }
@@ -596,17 +392,14 @@ body{
     box-shadow:0 0 0 3px rgba(10,132,255,.13);
 }
 
-.hq-primary-btn,
-.hq-secondary-btn{
+.hq-primary-btn{
     border:0;
-    border-radius:12px;
-    padding:13px 18px;
+    border-radius:11px;
+    padding:12px 16px;
     font:inherit;
+    font-size:13px;
     font-weight:600;
     cursor:pointer;
-}
-
-.hq-primary-btn{
     background:#003E7E;
     color:white;
 }
@@ -615,108 +408,100 @@ body{
     background:#002a55;
 }
 
-.hq-secondary-btn{
-    background:#eef4ff;
-    color:#003E7E;
-}
-
 .hq-error{
-    min-height:20px;
-    margin-top:9px;
+    min-height:19px;
+    margin-top:8px;
     color:#b91c1c;
-    font-size:13px;
-}
-
-.hq-choice-title{
-    color:#003E7E;
-    font-size:21px;
-    margin-bottom:8px;
-}
-
-.hq-choice-text{
-    color:#4b5563;
-    line-height:1.6;
-    font-size:14px;
-    margin-bottom:18px;
-}
-
-.hq-choice-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-.hq-choice{
-    border:1px solid #dbe7f5;
-    background:#f8fbff;
-    border-radius:16px;
-    padding:18px;
-    text-align:left;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.hq-choice:hover{
-    transform:translateY(-2px);
-    border-color:#9ebfe5;
-    box-shadow:0 10px 24px rgba(0,62,126,.10);
-}
-
-.hq-choice-icon{
-    font-size:28px;
-    display:block;
-    margin-bottom:10px;
-}
-
-.hq-choice strong{
-    display:block;
-    color:#003E7E;
-    margin-bottom:6px;
-}
-
-.hq-choice small{
-    color:#64748b;
-    line-height:1.45;
-}
-
-.server-path-box{
-    background:#f1f5f9;
-    border:1px solid #cbd5e1;
-    border-radius:12px;
-    padding:13px;
-    margin:14px 0;
-    font-family:Consolas, monospace;
-    font-size:13px;
-    overflow-wrap:anywhere;
-    color:#0f172a;
-}
-
-.hq-note{
-    color:#6b7280;
     font-size:12px;
-    line-height:1.55;
-    margin-top:13px;
 }
 
-@media(max-width:600px){
-    .hq-choice-grid{
-        grid-template-columns:1fr;
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(min-width:769px) and (min-height:700px){
+    body{
+        overflow:hidden;
     }
 
-    .hq-password-row{
-        flex-direction:column;
+    .page{
+        height:calc(100vh - 64px);
+        min-height:0;
     }
 }
 
-/* MOBILE */
+@media(max-height:760px) and (min-width:769px){
+    .hero{
+        flex-basis:36vh;
+        min-height:235px;
+    }
+
+    .hero-content h1{
+        margin-bottom:10px;
+    }
+
+    .portal-section{
+        padding-top:18px;
+        padding-bottom:20px;
+    }
+
+    .section-title{
+        margin-bottom:15px;
+    }
+
+    .portal-row{
+        min-height:180px;
+        padding:19px 22px;
+    }
+
+    .portal-info h3{
+        font-size:22px;
+    }
+
+    .portal-btn{
+        margin-top:13px;
+    }
+}
+
 @media(max-width:768px){
-    .header{
-        padding:0 20px;
+    body{
+        overflow:auto;
     }
 
+    .header{
+        height:auto;
+        min-height:64px;
+        padding:10px 14px;
+        gap:10px;
+    }
+
+    .logo img{
+        height:38px;
+    }
+
+    .portal-title{
+        font-size:12px;
+        white-space:normal;
+    }
+
+    .portal-subtitle{
+        display:none;
+    }
+
+    .admin-btn{
+        font-size:10px;
+        padding:7px 10px;
+    }
+
+    .page{
+        min-height:calc(100vh - 64px);
+    }
 
     .hero{
-        min-height:420px;
+        flex:0 0 auto;
+        min-height:330px;
+        max-height:none;
     }
 
     .hero-content h1{
@@ -724,7 +509,12 @@ body{
     }
 
     .hero-content p{
-        font-size:16px;
+        font-size:14px;
+    }
+
+    .portal-section{
+        flex:0 0 auto;
+        padding:35px 16px 45px;
     }
 
     .portal-grid-main{
@@ -732,38 +522,11 @@ body{
     }
 
     .portal-row{
-        text-align:center;
+        min-height:210px;
     }
 
-    .portal-icon{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .section-title{
-        font-size:34px;
-    }
-    .quick-access-card{
-        grid-template-columns:1fr;
-        gap:14px;
-        padding:16px;
-    }
-
-    .quick-access-logo-wrap{
-        min-height:105px;
-    }
-
-    .quick-access-meta{
-        min-height:auto;
-        border-left:none;
-        border-top:1px solid #dbe7f5;
-        padding:14px 0 0;
-    }
-
-    .quick-access-open{
-        width:100%;
-        height:44px;
-        border-radius:12px;
+    .hq-password-row{
+        flex-direction:column;
     }
 }
 </style>
@@ -774,195 +537,238 @@ body{
 <header class="header">
     <div class="logo">
         <img src="logo.png" alt="SWS Logo">
+
         <div>
-            <div class="portal-title">SUBSEA WORLWIDE SOLUTIONS (SWS) DOCUMENT PORTAL</div>
-            <div class="portal-subtitle">Subsea Division, Alam Maritim Group of Companies</div>
+            <div class="portal-title">
+                SUBSEA WORLDWIDE SOLUTIONS (SWS) DOCUMENT PORTAL
+            </div>
+
+            <div class="portal-subtitle">
+                Subsea Division, Alam Maritim Group of Companies
+            </div>
         </div>
     </div>
 
-    <div class="header-actions">
-        <a href="https://docs.google.com/spreadsheets/d/1YIZprCXV76NSLh-9UM9iWyiDEOExSXv3ey_N8arXpXU/edit?gid=0#gid=0" class="admin-btn" target="_blank">Admin Page</a>
-    </div>
+    <a
+        href="https://docs.google.com/spreadsheets/d/1YIZprCXV76NSLh-9UM9iWyiDEOExSXv3ey_N8arXpXU/edit?gid=0#gid=0"
+        class="admin-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Admin Page
+    </a>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>SWS Document Portal</h1>
-        <p>
-            The SWS Document Portal provides a centralized platform for the Subsea Division to access the latest controlled documents, including procedures, forms, work instructions, guidelines, and management system documents
-        </p>
-    </div>
-</section>
 
-<div class="ticker">
-    <span id="tickerContainer">Loading announcements...</span>
-</div>
+<div class="page">
 
-<section class="portal-section">
-    <div class="portal-container">
-        <div class="spotlight-label">Main Portal Access</div>
-        <h2 class="section-title">Choose Your Document Access</h2>
-        <p class="section-subtitle">
-         
-        </p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SWS Document Portal</h1>
 
-        <div class="portal-grid-main">
-            <div class="portal-row hq">
-                <div class="portal-left">
-                    <div class="portal-icon">🏢</div>
-                    <div class="portal-info">
-                        <h3>HQ Portal</h3>
-                        <p>
-                            Access all controlled documents, procedures, forms,
-                            guidelines, records and management system information
-                            available within the organization.
-                        </p>
+            <p>
+                The SWS Document Portal provides a centralized platform for the
+                Subsea Division to access the latest controlled documents,
+                including procedures, forms, work instructions, guidelines,
+                and management system documents.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="portal-section">
+        <div class="portal-container">
+
+            <div class="spotlight-label">
+                Main Portal Access
+            </div>
+
+            <h2 class="section-title">
+                Choose Your Document Access
+            </h2>
+
+            <div class="portal-grid-main">
+
+                <div class="portal-row hq">
+                    <div class="portal-top">
+                        <div class="portal-icon">🏢</div>
+
+                        <div class="portal-info">
+                            <h3>HQ Portal</h3>
+
+                            <p>
+                                Access all controlled documents, procedures,
+                                forms, guidelines, records and management system
+                                information available within the organization.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="portal-btn">
+                        <a href="#" onclick="openHQLogin(); return false;">
+                            Enter HQ Portal →
+                        </a>
                     </div>
                 </div>
 
-                <div class="portal-btn">
-                    <a href="#" onclick="openHQLogin(); return false;">Enter HQ Portal →</a>
-                </div>
-            </div>
 
-            <div class="portal-row worksite">
-                <div class="portal-left">
-                    <div class="portal-icon">🚢</div>
-                    <div class="portal-info">
-                        <h3>Work Site Portal</h3>
-                        <p>
-                            Access approved procedures, forms, work instructions
-                            and guidelines applicable to work site personnel
-                            and project operations.
-                        </p>
+                <div class="portal-row worksite">
+                    <div class="portal-top">
+                        <div class="portal-icon">🚢</div>
+
+                        <div class="portal-info">
+                            <h3>Work Site Portal</h3>
+
+                            <p>
+                                Access approved procedures, forms, work
+                                instructions and guidelines applicable to work
+                                site personnel and project operations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="portal-btn">
+                        <a href="worksite.html">
+                            Enter Work Site Portal →
+                        </a>
                     </div>
                 </div>
 
-                <div class="portal-btn">
-                    <a href="worksite.html?v=20260721-01">Enter Work Site Portal →</a>
-                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="content-container">
-    <div class="card">
-        <h2 class="card-title">Latest Updates</h2>
-        <ul class="updates-list" id="latestUpdatesContainer">
-            <li>📄 QA Procedure Rev.03 Released</li>
-            <li>📄 Approved Supplier List Updated</li>
-            <li>📄 Risk Assessment Guideline Updated</li>
-            <li>📄 Procurement Form Updated</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h2 class="card-title">Quick Access</h2>
-
-        <div id="quickAccessContainer" class="quick-access-list">
-            <div class="quick-access-empty">Loading quick access...</div>
-        </div>
-    </div>
-
-<div class="card campaign">
-    <h2 class="card-title">Campaign & Announcement</h2>
-
-    <div id="campaignContainer" class="campaign-grid">
-        Loading campaign posters...
-    </div>
 </div>
 
 
-
-
-
-
-
-
-<div id="hqModal" class="hq-modal" role="dialog" aria-modal="true" aria-labelledby="hqModalTitle">
+<div
+    id="hqModal"
+    class="hq-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="hqModalTitle"
+>
     <div class="hq-modal-card">
+
         <div class="hq-modal-header">
             <div>
-                <h3 id="hqModalTitle">HQ Portal Access</h3>
-                <p>Enter the HQ access password to continue.</p>
-            </div>
-            <button type="button" class="hq-modal-close" onclick="closeHQModal()" aria-label="Close">×</button>
-        </div>
+                <h3 id="hqModalTitle">
+                    HQ Portal Access
+                </h3>
 
-        <div class="hq-modal-body">
-            <div id="hqLoginStep">
-                <h4 class="hq-choice-title">HQ Portal Password</h4>
-                <p class="hq-choice-text">
+                <p>
                     Enter the HQ access password to continue.
                 </p>
-
-                <label class="hq-field-label" for="hqPassword">Password</label>
-
-                <div class="hq-password-row">
-                    <input
-                        id="hqPassword"
-                        class="hq-password-input"
-                        type="password"
-                        placeholder="Enter password"
-                        autocomplete="current-password"
-                    >
-                    <button type="button" class="hq-primary-btn" onclick="checkHQPassword()">
-                        Open HQ Portal
-                    </button>
-                </div>
-
-                <div id="hqPasswordError" class="hq-error"></div>
             </div>
+
+            <button
+                type="button"
+                class="hq-modal-close"
+                onclick="closeHQModal()"
+                aria-label="Close"
+            >
+                ×
+            </button>
+        </div>
+
+
+        <div class="hq-modal-body">
+
+            <h4 class="hq-choice-title">
+                HQ Portal Password
+            </h4>
+
+            <p class="hq-choice-text">
+                Enter the HQ access password to continue.
+            </p>
+
+            <label
+                class="hq-field-label"
+                for="hqPassword"
+            >
+                Password
+            </label>
+
+            <div class="hq-password-row">
+
+                <input
+                    id="hqPassword"
+                    class="hq-password-input"
+                    type="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="hq-primary-btn"
+                    onclick="checkHQPassword()"
+                >
+                    Open HQ Portal
+                </button>
+
+            </div>
+
+            <div
+                id="hqPasswordError"
+                class="hq-error"
+            ></div>
+
         </div>
     </div>
 </div>
 
-<footer class="footer">
-    <p>SWS Document Portal v1.0</p>
-    <p>Developed & Maintained by SWS Quality Department</p>
-    <p>© 2026 Subsea Worldwide Solutions</p>
-</footer>
 
 <script>
-/*
-PORTAL CACHE VERSION: 20260721-01
-When publishing a new portal revision, change this version value
-in all three HTML files, for example: 20260721-02.
-*/
-const PORTAL_VERSION = "20260721-01";
-
-
 
 const HQ_PASSWORD = "SWS00";
-const HQ_PAGE = "hq.html?v=20260721-01";
+const HQ_PAGE = "hq.html";
 
 function openHQLogin(){
-    const modal = document.getElementById("hqModal");
-
     resetHQModal();
-    modal.classList.add("show");
+
+    document
+        .getElementById("hqModal")
+        .classList
+        .add("show");
+
     document.body.style.overflow = "hidden";
 
     setTimeout(() => {
-        document.getElementById("hqPassword").focus();
+        document
+            .getElementById("hqPassword")
+            .focus();
     }, 50);
 }
 
+
 function closeHQModal(){
-    document.getElementById("hqModal").classList.remove("show");
+    document
+        .getElementById("hqModal")
+        .classList
+        .remove("show");
+
     document.body.style.overflow = "";
+
     resetHQModal();
 }
+
 
 function resetHQModal(){
     document.getElementById("hqPassword").value = "";
     document.getElementById("hqPasswordError").textContent = "";
 }
 
+
 function checkHQPassword(){
-    const enteredPassword = document.getElementById("hqPassword").value;
-    const errorBox = document.getElementById("hqPasswordError");
+    const enteredPassword =
+        document
+            .getElementById("hqPassword")
+            .value;
+
+    const errorBox =
+        document
+            .getElementById("hqPasswordError");
 
     if(enteredPassword === HQ_PASSWORD){
         errorBox.textContent = "";
@@ -970,288 +776,46 @@ function checkHQPassword(){
         return;
     }
 
-    errorBox.textContent = "Incorrect password. Please try again.";
-    document.getElementById("hqPassword").select();
+    errorBox.textContent =
+        "Incorrect password. Please try again.";
+
+    document
+        .getElementById("hqPassword")
+        .select();
 }
 
-document.getElementById("hqPassword").addEventListener("keydown", function(event){
-    if(event.key === "Enter"){
-        checkHQPassword();
-    }
-});
 
-document.getElementById("hqModal").addEventListener("click", function(event){
-    if(event.target === this){
-        closeHQModal();
-    }
-});
+document
+    .getElementById("hqPassword")
+    .addEventListener("keydown", function(event){
+
+        if(event.key === "Enter"){
+            checkHQPassword();
+        }
+
+    });
+
+
+document
+    .getElementById("hqModal")
+    .addEventListener("click", function(event){
+
+        if(event.target === this){
+            closeHQModal();
+        }
+
+    });
+
 
 document.addEventListener("keydown", function(event){
+
     if(event.key === "Escape"){
         closeHQModal();
     }
+
 });
 
-
-const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
-
-const jsonpTimers = {};
-const jsonpAttempts = {};
-
-function jsonp(action, callbackName){
-    const scriptId = callbackName + "Script";
-    const old = document.getElementById(scriptId);
-    if(old) old.remove();
-
-    if(!jsonpAttempts[callbackName]){
-        jsonpAttempts[callbackName] = 0;
-    }
-
-    jsonpAttempts[callbackName] += 1;
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src =
-        API_URL
-        + "?action=" + encodeURIComponent(action)
-        + "&callback=" + encodeURIComponent(callbackName)
-        + "&t=" + Date.now();
-
-    const fail = function(){
-        clearTimeout(jsonpTimers[callbackName]);
-
-        if(jsonpAttempts[callbackName] < 3){
-            setTimeout(() => jsonp(action, callbackName), 1500);
-            return;
-        }
-
-        showApiLoadError(action);
-    };
-
-    script.onerror = fail;
-
-    jsonpTimers[callbackName] = setTimeout(fail, 12000);
-
-    document.body.appendChild(script);
-}
-
-function markJsonpLoaded(callbackName){
-    clearTimeout(jsonpTimers[callbackName]);
-    jsonpAttempts[callbackName] = 0;
-
-    const script = document.getElementById(callbackName + "Script");
-    if(script){
-        script.remove();
-    }
-}
-
-function showApiLoadError(action){
-    if(action === "ticker"){
-        const container = document.getElementById("tickerContainer");
-        if(container){
-            container.innerHTML =
-                'Announcements could not be loaded. '
-                + '<button type="button" onclick="retryApi(\'ticker\',\'handleTicker\')" '
-                + 'style="border:0;background:transparent;color:white;text-decoration:underline;cursor:pointer;">Retry</button>';
-        }
-        return;
-    }
-
-    const fallbackMap = {
-        latest: ["latestUpdatesContainer", "<li>Latest updates could not be loaded.</li>"],
-        quick: ["quickAccessContainer", '<div class="quick-access-empty">Quick Access could not be loaded.</div>'],
-        campaign: ["campaignContainer", "Campaign information could not be loaded."]
-    };
-
-    const fallback = fallbackMap[action];
-    if(fallback){
-        const container = document.getElementById(fallback[0]);
-        if(container){
-            container.innerHTML = fallback[1];
-        }
-    }
-}
-
-function retryApi(action, callbackName){
-    jsonpAttempts[callbackName] = 0;
-
-    if(action === "ticker"){
-        const container = document.getElementById("tickerContainer");
-        if(container){
-            container.textContent = "Loading announcements...";
-        }
-    }
-
-    jsonp(action, callbackName);
-}
-
-function convertGoogleDriveLink(url){
-    if(!url) return "";
-    if(url.includes("drive.google.com/file/d/")){
-        const fileId = url.split("/d/")[1].split("/")[0];
-        return "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1200";
-    }
-    return url;
-}
-
-function openLink(url){
-    return url ? url : "#";
-}
-
-window.handleLatest = function(response){
-    markJsonpLoaded("handleLatest");
-    const container = document.getElementById("latestUpdatesContainer");
-    if(!container) return;
-
-    if(!response.success || !response.latest || response.latest.length === 0){
-        container.innerHTML = "<li>No latest update found.</li>";
-        return;
-    }
-
-    container.innerHTML = response.latest.map(item =>
-        `<li>${item.icon || "📄"} ${item.text}</li>`
-    ).join("");
-};
-
-window.handleQuick = function(response){
-    markJsonpLoaded("handleQuick");
-    const container = document.getElementById("quickAccessContainer");
-
-    if(!container){
-        return;
-    }
-
-    if(
-        !response ||
-        !response.success ||
-        !response.quick ||
-        response.quick.length === 0
-    ){
-        container.innerHTML = `
-            <div class="quick-access-empty">
-                No quick access found.
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = response.quick.map(item => {
-        const title = item.title || "Quick Access";
-        const link = openLink(item.link);
-
-        const imageUrl = convertGoogleDriveLink(
-            item.imageUrl ||
-            item.image ||
-            item.logo ||
-            ""
-        );
-
-        const description =
-            item.description ||
-            item.desc ||
-            "No description available.";
-
-        const applicability =
-            item.applicability ||
-            item.applicableTo ||
-            "General";
-
-        const owner =
-            item.owner ||
-            item.department ||
-            "Not specified";
-
-        const logoContent = imageUrl
-            ? `<img src="${imageUrl}" alt="${title}" class="quick-access-logo">`
-            : `<div class="quick-access-fallback">${title.charAt(0)}</div>`;
-
-        return `
-            <div class="quick-access-card">
-                <a
-                    href="${link}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="quick-access-logo-wrap"
-                    title="Open ${title}"
-                >
-                    ${logoContent}
-                </a>
-
-                <div class="quick-access-main">
-                    <div class="quick-access-name">${title}</div>
-                    <div class="quick-access-description">${description}</div>
-                </div>
-
-                <div class="quick-access-meta">
-                    <div class="quick-access-meta-label">Applicability</div>
-                    <div class="quick-access-meta-value">${applicability}</div>
-                </div>
-
-                <div class="quick-access-meta">
-                    <div class="quick-access-meta-label">Owner</div>
-                    <div class="quick-access-meta-value">${owner}</div>
-                </div>
-
-                <a
-                    href="${link}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="quick-access-open"
-                    title="Open link"
-                    aria-label="Open ${title}"
-                >→</a>
-            </div>
-        `;
-    }).join("");
-};
-
-window.handleCampaign = function(response){
-    markJsonpLoaded("handleCampaign");
-    const container = document.getElementById("campaignContainer");
-    if(!container) return;
-
-    if(!response.success || !response.campaign || response.campaign.length === 0){
-        container.innerHTML = "No active poster found.";
-        return;
-    }
-
-    container.innerHTML = response.campaign.map(item => {
-        const imageDirectUrl = convertGoogleDriveLink(item.imageUrl);
-        return `
-            <div class="campaign-card">
-                <img src="${imageDirectUrl}" alt="${item.title}">
-                <h3>${item.title}</h3>
-                <p>${item.description}</p>
-            </div>
-        `;
-    }).join("");
-};
-
-window.handleTicker = function(response){
-    markJsonpLoaded("handleTicker");
-    const container = document.getElementById("tickerContainer");
-    if(!container) return;
-
-    if(!response.success || !response.ticker || response.ticker.length === 0){
-        container.innerHTML = "No active announcement.";
-        return;
-    }
-
-    container.innerHTML = response.ticker.map(item => {
-        const icon = item.icon ? item.icon + " " : "";
-        return icon + item.message;
-    }).join(" &bull; ");
-};
-
-jsonp("ticker", "handleTicker");
-jsonp("latest", "handleLatest");
-jsonp("quick", "handleQuick");
-jsonp("campaign", "handleCampaign");
-
 </script>
-
-
-
 
 </body>
 </html>
