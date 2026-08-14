@@ -8,14 +8,14 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260814-03">
+<meta name="portal-version" content="20260814-04">
 
 
 <title>SWS HQ Portal</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<script type="text/javascript" src="https://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=YyN4DZHh1p5YO7qfVe7Iut9G-prh26wY9LolPaBnZO3UeVkG4OKbZXZaeWI4xI4uTkf2QfTdd648bLpdpEH1fPWACbEtrqTtR-V-Js7JA-dcLJYgl6dUNDap_5UZBAah6rXsaRXiCn3OLMacmizq7PsMd_P2br8UhAPJwAmVer8XvzTcytYH_S5BfADD-hVKzuVH6OvkcbfpbzDrr_6anvja8IvlC0m7lx_JY4itSju3fC0agBTW_Y4Hftf87Dab68whDkTgElt9ZwYd-mQWO75pAidR1qY_gh9ldhMNRTKApc1qIehkeomSwsbSnr6k" charset="UTF-8"></script><style>
+<style>
 
 body{
     background:#f5f7fa;
@@ -581,13 +581,13 @@ body{
 
 <div class="container">
 
-<h1>SWS HQ Portal</h1>
+<h1>HQ Portal</h1>
 
 <p>
 All Controlled Documents
 </p>
 
-<a href="index.html?v=20260814-03" class="back-home">← Back to Homepage</a>
+<a href="index.html?v=20260814-04" class="back-home">← Back to Homepage</a>
 
 </div>
 
@@ -643,11 +643,11 @@ All Controlled Documents
 
 <script>
 /*
-PORTAL CACHE VERSION: 20260814-03
+PORTAL CACHE VERSION: 20260814-04
 When publishing a new portal revision, change this version value
 in all three HTML files, for example: 20260721-02.
 */
-const PORTAL_VERSION = "20260814-03";
+const PORTAL_VERSION = "20260814-04";
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
 
@@ -702,34 +702,8 @@ link:
 - Relative page/file: folder/file.html
 */
 
-const quickAccessItems = [
-    {
-        title: "SWS Quality Induction",
-        description: "No description available.",
-        applicability: "Worksite & HQ",
-        owner: "Quality Department",
-        image: "https://dummyimage.com/240x160/ffffff/003e7e.png&text=SWS+QUALITY%0AINDUCTION",
-        link: "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-        title: "Quality Dashboard",
-        description: "Open the latest SWS quality performance dashboard.",
-        applicability: "HQ",
-        owner: "Quality Department",
-        image: "",
-        link: "#"
-    },
-    {
-        title: "IMS Manual",
-        description: "Quick access to the current Integrated Management System Manual.",
-        applicability: "HQ",
-        owner: "QHSE Department",
-        image: "",
-        link: "#"
-    }
-];
-
-
+// Quick Access items are now loaded dynamically from documents.json.
+// This portal reads its own Google Sheet tab through the synced JSON.
 
 async function loadPortalData(){
     const stats = document.getElementById("stats");
@@ -762,6 +736,10 @@ async function loadPortalData(){
 
         renderCampaign(
         Array.isArray(data.hqCampaign) ? data.hqCampaign : []
+        );
+
+        renderQuickAccess(
+            Array.isArray(data.hqQuickAccess) ? data.hqQuickAccess : []
         );
 
         renderDocuments(data.documents);
@@ -1057,10 +1035,11 @@ function renderGuideButton(doc){
 }
 
 
-function renderQuickAccess(){
+function renderQuickAccess(items){
     const container = document.getElementById("quickAccessList");
+    const quickItems = Array.isArray(items) ? items : [];
 
-    if(!quickAccessItems.length){
+    if(!quickItems.length){
         container.innerHTML = `
             <div class="quick-access-empty">
                 No Quick Access item available.
@@ -1069,8 +1048,9 @@ function renderQuickAccess(){
         return;
     }
 
-    container.innerHTML = quickAccessItems.map(item => {
-        const image = safe(item.image);
+    container.innerHTML = quickItems.map(item => {
+        const image = safe(item.imageUrl || item.image);
+
         const imageHTML = image
             ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}">`
             : `<span class="quick-access-placeholder">📄</span>`;
@@ -1206,7 +1186,6 @@ function applySearch(){
 
 document.getElementById("searchBox").addEventListener("input", applySearch);
 
-renderQuickAccess();
 loadPortalData();
 
 </script>

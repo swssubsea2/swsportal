@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260814-02">
+<meta name="portal-version" content="20260814-04">
 
 
 <title>SWS Work Site Portal</title>
@@ -587,13 +587,13 @@ body{
 
 <div class="container">
 
-<h1>SWS Work Site Portal</h1>
+<h1>Work Site Portal</h1>
 
 <p>
 Controlled Documents Applicable to Work Site
 </p>
 
-<a href="index.html?v=20260814-02" class="back-home">← Back to Homepage</a>
+<a href="index.html?v=20260814-04" class="back-home">← Back to Homepage</a>
 
 </div>
 
@@ -649,11 +649,11 @@ Controlled Documents Applicable to Work Site
 
 <script>
 /*
-PORTAL CACHE VERSION: 20260814-02
+PORTAL CACHE VERSION: 20260814-04
 When publishing a new portal revision, change this version value
 in all three HTML files, for example: 20260721-02.
 */
-const PORTAL_VERSION = "20260814-02";
+const PORTAL_VERSION = "20260814-04";
 
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
@@ -673,32 +673,8 @@ link:
 - Relative page/file: folder/file.html
 */
 
-const quickAccessItems = [
-    {
-        title: "SWS Quality Induction",
-        description: "No description available.",
-        applicability: "Worksite & HQ",
-        owner: "Quality Department",
-        image: "https://dummyimage.com/240x160/ffffff/003e7e.png&text=SWS+QUALITY%0AINDUCTION",
-        link: "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-        title: "Worksite Forms",
-        description: "Quick access to forms used during worksite operations.",
-        applicability: "Worksite",
-        owner: "Operations Department",
-        image: "",
-        link: "#"
-    },
-    {
-        title: "Emergency Contacts",
-        description: "View important worksite and emergency contact information.",
-        applicability: "Worksite",
-        owner: "HSE Department",
-        image: "",
-        link: "#"
-    }
-];
+// Quick Access items are now loaded dynamically from documents.json.
+// This portal reads its own Google Sheet tab through the synced JSON.
 
 async function loadPortalData(){
     const stats = document.getElementById("stats");
@@ -734,6 +710,12 @@ async function loadPortalData(){
         		? data.worksiteCampaign
         		: []
 	);
+
+        renderQuickAccess(
+            Array.isArray(data.worksiteQuickAccess)
+                ? data.worksiteQuickAccess
+                : []
+        );
 
         const docs = data.documents.filter(doc =>
             safe(doc.applicableToWorksite).toLowerCase() === "yes"
@@ -1000,10 +982,11 @@ function renderGuideButton(doc){
     `;
 }
 
-function renderQuickAccess(){
+function renderQuickAccess(items){
     const container = document.getElementById("quickAccessList");
+    const quickItems = Array.isArray(items) ? items : [];
 
-    if(!quickAccessItems.length){
+    if(!quickItems.length){
         container.innerHTML = `
             <div class="quick-access-empty">
                 No Quick Access item available.
@@ -1012,8 +995,8 @@ function renderQuickAccess(){
         return;
     }
 
-    container.innerHTML = quickAccessItems.map(item => {
-        const image = safe(item.image);
+    container.innerHTML = quickItems.map(item => {
+        const image = safe(item.imageUrl || item.image);
 
         const imageHTML = image
             ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}">`
@@ -1150,8 +1133,6 @@ document.getElementById('searchBox').addEventListener('input', function(){
             row.innerText.toLowerCase().includes(search) ? '' : 'none';
     });
 });
-
-renderQuickAccess();
 
 </script>
 
