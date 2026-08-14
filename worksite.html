@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260814-04">
+<meta name="portal-version" content="20260814-05">
 
 
 <title>SWS Work Site Portal</title>
@@ -593,7 +593,7 @@ body{
 Controlled Documents Applicable to Work Site
 </p>
 
-<a href="index.html?v=20260814-04" class="back-home">← Back to Homepage</a>
+<a href="index.html?v=20260814-05" class="back-home">← Back to Homepage</a>
 
 </div>
 
@@ -649,11 +649,11 @@ Controlled Documents Applicable to Work Site
 
 <script>
 /*
-PORTAL CACHE VERSION: 20260814-04
+PORTAL CACHE VERSION: 20260814-05
 When publishing a new portal revision, change this version value
 in all three HTML files, for example: 20260721-02.
 */
-const PORTAL_VERSION = "20260814-04";
+const PORTAL_VERSION = "20260814-05";
 
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
@@ -675,6 +675,34 @@ link:
 
 // Quick Access items are now loaded dynamically from documents.json.
 // This portal reads its own Google Sheet tab through the synced JSON.
+
+const defaultQuickAccessItems = [
+    {
+        title: "SWS Quality Induction",
+        description: "No description available.",
+        applicability: "Worksite & HQ",
+        owner: "Quality Department",
+        imageUrl: "https://dummyimage.com/240x160/ffffff/003e7e.png&text=SWS+QUALITY%0AINDUCTION",
+        link: "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+        title: "Worksite Forms",
+        description: "Quick access to forms used during worksite operations.",
+        applicability: "Worksite",
+        owner: "Operations Department",
+        imageUrl: "",
+        link: "#"
+    },
+    {
+        title: "Emergency Contacts",
+        description: "View important worksite and emergency contact information.",
+        applicability: "Worksite",
+        owner: "HSE Department",
+        imageUrl: "",
+        link: "#"
+    }
+];
+
 
 async function loadPortalData(){
     const stats = document.getElementById("stats");
@@ -711,11 +739,12 @@ async function loadPortalData(){
         		: []
 	);
 
-        renderQuickAccess(
-            Array.isArray(data.worksiteQuickAccess)
+        const worksiteQuickItems =
+            Array.isArray(data.worksiteQuickAccess) && data.worksiteQuickAccess.length
                 ? data.worksiteQuickAccess
-                : []
-        );
+                : defaultQuickAccessItems;
+
+        renderQuickAccess(worksiteQuickItems);
 
         const docs = data.documents.filter(doc =>
             safe(doc.applicableToWorksite).toLowerCase() === "yes"
