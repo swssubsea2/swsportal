@@ -771,35 +771,80 @@ function escapeHTML(value){
 }
 
 
-function convertGoogleDriveImage(url){
+function getYouTubeId(url){
     const value = safe(url);
 
     if(!value){
         return "";
     }
 
-    const fileMatch = value.match(
-        /drive\.google\.com\/file\/d\/([^/]+)/
+    const match = value.match(
+        /(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
     );
 
-    if(fileMatch){
-        return "https://drive.google.com/thumbnail?id=" +
-            encodeURIComponent(fileMatch[1]) +
-            "&sz=w1200";
+    return match ? match[1] : "";
+}
+
+
+function getGoogleDriveId(url){
+    const value = safe(url);
+
+    if(!value){
+        return "";
     }
 
-    const idMatch = value.match(/[?&]id=([^&]+)/);
+    let match = value.match(/drive\.google\.com\/file\/d\/([^/?#]+)/);
 
-    if(
-        value.includes("drive.google.com") &&
-        idMatch
-    ){
-        return "https://drive.google.com/thumbnail?id=" +
-            encodeURIComponent(idMatch[1]) +
-            "&sz=w1200";
+    if(match){
+        return match[1];
     }
 
-    return value;
+    match = value.match(/[?&]id=([^&#]+)/);
+
+    if(value.includes("drive.google.com") && match){
+        return match[1];
+    }
+
+    return "";
+}
+
+
+function getCampaignMedia(url){
+    const value = safe(url);
+
+    if(!value){
+        return {
+            previewUrl: "",
+            openUrl: "",
+            isVideo: false
+        };
+    }
+
+    const youtubeId = getYouTubeId(value);
+
+    if(youtubeId){
+        return {
+            previewUrl: `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`,
+            openUrl: value,
+            isVideo: true
+        };
+    }
+
+    const driveId = getGoogleDriveId(value);
+
+    if(driveId){
+        return {
+            previewUrl: `https://drive.google.com/thumbnail?id=${encodeURIComponent(driveId)}&sz=w1200`,
+            openUrl: value,
+            isVideo: false
+        };
+    }
+
+    return {
+        previewUrl: value,
+        openUrl: value,
+        isVideo: false
+    };
 }
 
 
@@ -835,8 +880,14 @@ function renderCampaign(items){
     const list = document.getElementById("campaignList");
     const layout = document.getElementById("portalLayout");
 
+    // Supports both the new JSON field "mediaUrl"
+    // and the old field "imageUrl" as a safety fallback.
     const activeItems = (items || [])
-        .filter(item => safe(item.title) || safe(item.imageUrl));
+        .filter(item =>
+            safe(item.title) ||
+            safe(item.mediaUrl) ||
+            safe(item.imageUrl)
+        );
 
     if(!activeItems.length){
         panel.hidden = true;
@@ -849,9 +900,38 @@ function renderCampaign(items){
     layout.classList.remove("no-campaign");
 
     list.innerHTML = activeItems.map(item => {
-        const imageUrl = convertGoogleDriveImage(item.imageUrl);
-        const imageHTML = imageUrl
-            ? `<img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(item.title || "Campaign")}">`
+        const rawMediaUrl = safe(item.mediaUrl || item.imageUrl);
+        const media = getCampaignMedia(rawMediaUrl);
+
+        const imageHTML = media.previewUrl
+            ? `
+                <div style="position:relative;width:100%;height:100%;">
+                    <img
+                        src="${escapeHTML(media.previewUrl)}"
+                        alt="${escapeHTML(item.title || "Campaign")}"
+                    >
+
+                    ${media.isVideo ? `
+                        <span style="
+                            position:absolute;
+                            left:50%;
+                            top:50%;
+                            transform:translate(-50%,-50%);
+                            width:56px;
+                            height:56px;
+                            border-radius:50%;
+                            background:rgba(0,0,0,.68);
+                            color:#fff;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:23px;
+                            padding-left:3px;
+                            pointer-events:none;
+                        ">▶</span>
+                    ` : ""}
+                </div>
+            `
             : `<span class="campaign-image-placeholder">📣</span>`;
 
         const inner = `
@@ -865,14 +945,12 @@ function renderCampaign(items){
             </div>
         `;
 
-        const link = safe(item.link);
-
-        if(link){
+        if(media.openUrl){
             return `
                 <div class="campaign-card">
                     <a
                         class="campaign-card-link"
-                        href="${escapeHTML(link)}"
+                        href="${escapeHTML(media.openUrl)}"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
