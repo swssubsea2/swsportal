@@ -189,14 +189,14 @@
     {
       "active": "Yes",
       "title": "Quality Benefit",
-      "description": "Salam Semua",
+      "description": "",
       "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing"
     },
     {
       "active": "Yes",
-      "title": "Quality Poster 2",
-      "description": "Assalamualaikum",
-      "mediaUrl": "https://www.youtube.com/watch?v=jpM0Jp6X9-4"
+      "title": "What is Quality Management",
+      "description": "Please watch",
+      "mediaUrl": "https://www.youtube.com/watch?v=UXChmphBrw0"
     }
   ],
   "worksiteCampaign": [
@@ -211,6 +211,74 @@
       "title": "Quality Poster 2",
       "description": "Working together for quality, reliability and accountability.",
       "mediaUrl": "https://www.youtube.com/watch?v=bN850IMtuNU"
+    }
+  ],
+  "hqQuickAccess": [
+    {
+      "title": "WWW",
+      "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
+      "link": "https://youtu.be/a7oA6_fiR9g",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "X",
+      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
+      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "C",
+      "imageUrl": "Google Drive image link",
+      "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
+      "description": "Access Alam Maritim corporate documents",
+      "applicability": "Worksite & HQ",
+      "owner": ""
+    },
+    {
+      "title": "V",
+      "imageUrl": "Google Drive image link",
+      "link": "Portal link",
+      "description": "This for MRM",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality"
+    }
+  ],
+  "worksiteQuickAccess": [
+    {
+      "title": "SWS Quality Induction",
+      "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
+      "link": "https://youtu.be/a7oA6_fiR9g",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "Project List",
+      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
+      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "Alam Corporate Document Portal",
+      "imageUrl": "Google Drive image link",
+      "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
+      "description": "Access Alam Maritim corporate documents",
+      "applicability": "Worksite & HQ",
+      "owner": ""
+    },
+    {
+      "title": "MRM",
+      "imageUrl": "Google Drive image link",
+      "link": "Portal link",
+      "description": "This for MRM",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality"
     }
   ],
   "campaign": [
@@ -229,6 +297,40 @@
       "mediaUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
       "imageUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
       "link": ""
+    }
+  ],
+  "quickAccess": [
+    {
+      "title": "SWS Quality Induction",
+      "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
+      "link": "https://youtu.be/a7oA6_fiR9g",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "Project List",
+      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
+      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
+      "description": "",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality Department"
+    },
+    {
+      "title": "Alam Corporate Document Portal",
+      "imageUrl": "Google Drive image link",
+      "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
+      "description": "Access Alam Maritim corporate documents",
+      "applicability": "Worksite & HQ",
+      "owner": ""
+    },
+    {
+      "title": "MRM",
+      "imageUrl": "Google Drive image link",
+      "link": "Portal link",
+      "description": "This for MRM",
+      "applicability": "Worksite & HQ",
+      "owner": "Quality"
     }
   ]
 }
