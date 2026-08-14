@@ -212,5 +212,23 @@
       "description": "Working together for quality, reliability and accountability.",
       "mediaUrl": ""
     }
+  ],
+  "campaign": [
+    {
+      "active": "Yes",
+      "title": "Quality Benefit",
+      "description": "Weiiii",
+      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
+      "imageUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
+      "link": ""
+    },
+    {
+      "active": "Yes",
+      "title": "Quality Poster 2",
+      "description": "Youtube",
+      "mediaUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
+      "imageUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
+      "link": ""
+    }
   ]
 }
