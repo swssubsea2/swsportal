@@ -144,5 +144,23 @@
       "link": "https://forms.gle/kf1RsqsgsqmqSs5N8",
       "videoLink": ""
     }
+  ],
+  "hqTicker": [],
+  "worksiteTicker": [],
+  "campaign": [
+    {
+      "active": "Yes",
+      "title": "Quality Benefit",
+      "description": "Hoi",
+      "imageUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
+      "link": ""
+    },
+    {
+      "active": "Yes",
+      "title": "Quality Poster 2",
+      "description": "Working together for quality, reliability and accountability.",
+      "imageUrl": "https://drive.google.com/file/d/1deed-tsdN748novsapMCdRZ1Nj_N68vw/view?usp=sharing",
+      "link": ""
+    }
   ]
 }
