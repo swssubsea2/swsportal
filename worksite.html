@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260721-01">
+<meta name="portal-version" content="20260814-02">
 
 
 <title>SWS Work Site Portal</title>
@@ -143,11 +143,15 @@ body{
 
 .portal-layout{
     display:grid;
-    grid-template-columns:minmax(0, 1fr) 360px;
+    grid-template-columns:250px minmax(0,1fr) 350px;
     gap:24px;
     align-items:start;
     margin-top:25px;
     margin-bottom:60px;
+}
+
+.portal-layout.no-campaign{
+    grid-template-columns:minmax(0,1fr) 350px;
 }
 
 /* QUICK ACCESS */
@@ -283,6 +287,172 @@ body{
     font-size:14px;
 }
 
+
+/* =====================================================
+   TICKER
+   ===================================================== */
+
+.ticker-bar{
+    background:#ffffff;
+    border-bottom:1px solid #dfe7f2;
+    box-shadow:0 2px 10px rgba(0,62,126,.05);
+}
+
+.ticker-inner{
+    min-height:46px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    overflow:hidden;
+}
+
+.ticker-label{
+    flex:0 0 auto;
+    background:#003E7E;
+    color:#ffffff;
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+.ticker-viewport{
+    min-width:0;
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-track{
+    display:inline-flex;
+    align-items:center;
+    width:max-content;
+    animation:swsTicker 34s linear infinite;
+}
+
+.ticker-bar:hover .ticker-track{
+    animation-play-state:paused;
+}
+
+.ticker-item{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#26364a;
+    font-size:14px;
+    padding-right:46px;
+}
+
+.ticker-dot{
+    color:#9fb2ca;
+    margin-right:18px;
+}
+
+@keyframes swsTicker{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+}
+
+
+/* =====================================================
+   CAMPAIGN PANEL
+   ===================================================== */
+
+.campaign-panel{
+    position:sticky;
+    top:22px;
+}
+
+.campaign-title{
+    color:#003E7E;
+    font-size:30px;
+    font-weight:300;
+    margin:0 0 16px;
+}
+
+.campaign-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.campaign-card{
+    background:#ffffff;
+    border:1px solid #d7e5f7;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(0,62,126,.06);
+}
+
+.campaign-card-link{
+    display:block;
+    color:inherit;
+    text-decoration:none;
+}
+
+.campaign-image{
+    width:100%;
+    aspect-ratio:4 / 5;
+    background:#eef4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.campaign-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.campaign-image-placeholder{
+    font-size:42px;
+}
+
+.campaign-content{
+    padding:14px 15px 16px;
+}
+
+.campaign-content h3{
+    color:#003E7E;
+    font-size:17px;
+    font-weight:700;
+    margin:0 0 7px;
+    line-height:1.3;
+}
+
+.campaign-content p{
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.45;
+    margin:0;
+}
+
+.campaign-empty{
+    background:#ffffff;
+    border:1px dashed #cbd5e1;
+    border-radius:16px;
+    padding:20px;
+    color:#64748b;
+    text-align:center;
+    font-size:13px;
+}
+
+@media(max-width:1400px){
+    .portal-layout{
+        grid-template-columns:220px minmax(0,1fr) 320px;
+        gap:20px;
+    }
+
+    .portal-layout.no-campaign{
+        grid-template-columns:minmax(0,1fr) 320px;
+    }
+}
+
 @media(max-width:1200px){
     .portal-container{
         padding-left:24px;
@@ -346,6 +516,66 @@ body{
     }
 }
 
+
+@media(max-width:1200px){
+    .portal-layout,
+    .portal-layout.no-campaign{
+        grid-template-columns:220px minmax(0,1fr);
+    }
+
+    .quick-access-panel{
+        grid-column:1 / -1;
+        position:static;
+    }
+
+    .quick-access-list{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:992px){
+    .portal-layout,
+    .portal-layout.no-campaign{
+        grid-template-columns:1fr;
+    }
+
+    .campaign-panel,
+    .quick-access-panel{
+        position:static;
+        grid-column:auto;
+    }
+
+    .campaign-list{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .campaign-image{
+        aspect-ratio:16 / 10;
+    }
+}
+
+@media(max-width:650px){
+    .ticker-inner{
+        gap:8px;
+    }
+
+    .ticker-label{
+        display:none;
+    }
+
+    .ticker-item{
+        font-size:13px;
+        padding-right:34px;
+    }
+
+    .campaign-list,
+    .quick-access-list{
+        grid-template-columns:1fr;
+    }
+}
+
 </style>
 
 </head>
@@ -362,15 +592,32 @@ body{
 Controlled Documents Applicable to Work Site
 </p>
 
-<a href="index.html?v=20260721-01" class="back-home">← Back to Homepage</a>
+<a href="index.html?v=20260814-02" class="back-home">← Back to Homepage</a>
 
 </div>
 
 </div>
+
+<div id="tickerBar" class="ticker-bar" hidden>
+    <div class="container-fluid portal-container">
+        <div class="ticker-inner">
+            <span class="ticker-label">Updates</span>
+            <div class="ticker-viewport">
+                <div id="tickerTrack" class="ticker-track"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container-fluid portal-container">
 
-<div class="portal-layout">
+<div id="portalLayout" class="portal-layout no-campaign">
+
+    <aside id="campaignPanel" class="campaign-panel" hidden>
+        <h2 class="campaign-title">Campaign</h2>
+        <div id="campaignList" class="campaign-list"></div>
+    </aside>
 
     <main class="card-custom">
 
@@ -401,11 +648,11 @@ Controlled Documents Applicable to Work Site
 
 <script>
 /*
-PORTAL CACHE VERSION: 20260721-01
+PORTAL CACHE VERSION: 20260814-02
 When publishing a new portal revision, change this version value
 in all three HTML files, for example: 20260721-02.
 */
-const PORTAL_VERSION = "20260721-01";
+const PORTAL_VERSION = "20260814-02";
 
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
@@ -452,7 +699,7 @@ const quickAccessItems = [
     }
 ];
 
-async function loadDocuments(){
+async function loadPortalData(){
     const stats = document.getElementById("stats");
 
     try{
@@ -460,9 +707,7 @@ async function loadDocuments(){
 
         const response = await fetch(
             "documents.json?t=" + Date.now(),
-            {
-                cache: "no-store"
-            }
+            { cache: "no-store" }
         );
 
         if(!response.ok){
@@ -479,20 +724,29 @@ async function loadDocuments(){
             throw new Error("Invalid documents.json");
         }
 
+        renderTicker(
+            Array.isArray(data.worksiteTicker) ? data.worksiteTicker : []
+        );
+
+        renderCampaign(
+            Array.isArray(data.campaign) ? data.campaign : []
+        );
+
         const docs = data.documents.filter(doc =>
             safe(doc.applicableToWorksite).toLowerCase() === "yes"
         );
 
         renderDocuments(docs);
+
     }catch(error){
-        console.error("MDR load error:", error);
+        console.error("Portal load error:", error);
 
         stats.innerHTML = `
-            Unable to load MDR.
+            Unable to load portal data.
             <button
                 type="button"
                 class="btn btn-sm btn-outline-primary ms-2"
-                onclick="loadDocuments()"
+                onclick="loadPortalData()"
             >
                 Retry
             </button>
@@ -511,6 +765,126 @@ function escapeHTML(value){
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
+}
+
+
+function convertGoogleDriveImage(url){
+    const value = safe(url);
+
+    if(!value){
+        return "";
+    }
+
+    const fileMatch = value.match(
+        /drive\.google\.com\/file\/d\/([^/]+)/
+    );
+
+    if(fileMatch){
+        return "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(fileMatch[1]) +
+            "&sz=w1200";
+    }
+
+    const idMatch = value.match(/[?&]id=([^&]+)/);
+
+    if(
+        value.includes("drive.google.com") &&
+        idMatch
+    ){
+        return "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(idMatch[1]) +
+            "&sz=w1200";
+    }
+
+    return value;
+}
+
+
+function renderTicker(items){
+    const bar = document.getElementById("tickerBar");
+    const track = document.getElementById("tickerTrack");
+
+    const activeItems = (items || [])
+        .filter(item => safe(item.message));
+
+    if(!activeItems.length){
+        bar.hidden = true;
+        track.innerHTML = "";
+        return;
+    }
+
+    const setHTML = activeItems.map(item => `
+        <span class="ticker-item">
+            <span>${escapeHTML(item.icon || "📢")}</span>
+            <span>${escapeHTML(item.message)}</span>
+            <span class="ticker-dot">•</span>
+        </span>
+    `).join("");
+
+    // Duplicate the set to produce a continuous marquee loop.
+    track.innerHTML = setHTML + setHTML;
+    bar.hidden = false;
+}
+
+
+function renderCampaign(items){
+    const panel = document.getElementById("campaignPanel");
+    const list = document.getElementById("campaignList");
+    const layout = document.getElementById("portalLayout");
+
+    const activeItems = (items || [])
+        .filter(item => safe(item.title) || safe(item.imageUrl));
+
+    if(!activeItems.length){
+        panel.hidden = true;
+        list.innerHTML = "";
+        layout.classList.add("no-campaign");
+        return;
+    }
+
+    panel.hidden = false;
+    layout.classList.remove("no-campaign");
+
+    list.innerHTML = activeItems.map(item => {
+        const imageUrl = convertGoogleDriveImage(item.imageUrl);
+        const imageHTML = imageUrl
+            ? `<img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(item.title || "Campaign")}">`
+            : `<span class="campaign-image-placeholder">📣</span>`;
+
+        const inner = `
+            <div class="campaign-image">
+                ${imageHTML}
+            </div>
+
+            <div class="campaign-content">
+                <h3>${escapeHTML(item.title || "Campaign")}</h3>
+                <p>${escapeHTML(item.description || "")}</p>
+            </div>
+        `;
+
+        const link = safe(item.link);
+
+        if(link){
+            return `
+                <div class="campaign-card">
+                    <a
+                        class="campaign-card-link"
+                        href="${escapeHTML(link)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        ${inner}
+                    </a>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="campaign-card">
+                ${inner}
+            </div>
+        `;
+    }).join("");
 }
 
 function getDocumentLink(doc){
@@ -685,7 +1059,7 @@ function renderDocuments(docs){
         html || 'No document found.';
 }
 
-loadDocuments();
+loadPortalData();
 
 document.getElementById('searchBox').addEventListener('input', function(){
     const search = safe(this.value).toLowerCase();
