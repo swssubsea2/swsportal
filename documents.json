@@ -145,13 +145,51 @@
       "videoLink": ""
     }
   ],
-  "hqTicker": [],
-  "worksiteTicker": [],
+  "hqTicker": [
+    {
+      "active": "Yes",
+      "sort": 1,
+      "icon": "🏆",
+      "message": "hMMM"
+    },
+    {
+      "active": "Yes",
+      "sort": 2,
+      "icon": "📢",
+      "message": "ahahahaha"
+    },
+    {
+      "active": "Yes",
+      "sort": 3,
+      "icon": "📄",
+      "message": "Wooooooo"
+    }
+  ],
+  "worksiteTicker": [
+    {
+      "active": "Yes",
+      "sort": 1,
+      "icon": "🏆",
+      "message": "kkkk"
+    },
+    {
+      "active": "Yes",
+      "sort": 2,
+      "icon": "📢",
+      "message": "kkkk"
+    },
+    {
+      "active": "Yes",
+      "sort": 3,
+      "icon": "📄",
+      "message": "kkkk"
+    }
+  ],
   "campaign": [
     {
       "active": "Yes",
       "title": "Quality Benefit",
-      "description": "Hoi",
+      "description": "Weiiii",
       "imageUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
       "link": ""
     },
