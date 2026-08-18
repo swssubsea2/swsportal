@@ -188,23 +188,23 @@
   "hqCampaign": [
     {
       "active": "Yes",
-      "title": "Quality Benefit",
+      "title": "Focus On Quality",
       "description": "",
-      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing"
+      "mediaUrl": "https://drive.google.com/file/d/1UIFHSzxxqsLZYW0MDhgnzsZvFduvSNwq/view?usp=drive_link"
     },
     {
       "active": "Yes",
       "title": "What is Quality Management",
-      "description": "Please watch",
+      "description": "",
       "mediaUrl": "https://www.youtube.com/watch?v=UXChmphBrw0"
     }
   ],
   "worksiteCampaign": [
     {
       "active": "Yes",
-      "title": "Quality Benefit",
-      "description": "Weiiii",
-      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing"
+      "title": "Focus On Quality",
+      "description": "",
+      "mediaUrl": "https://drive.google.com/file/d/1UIFHSzxxqsLZYW0MDhgnzsZvFduvSNwq/view?usp=drive_link"
     },
     {
       "active": "Yes",
@@ -236,7 +236,7 @@
       "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
       "description": "Alam Maritim Portal is a centralized corporate platform providing employees access to IMS documents, policies, procedures, acknowledgements, and publications.",
       "applicability": "Worksite & HQ",
-      "owner": ""
+      "owner": "Alam Maritim Resources Berhad"
     },
     {
       "title": "V",
