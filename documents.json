@@ -81,7 +81,7 @@
     },
     {
       "department": "HR",
-      "docNo": "",
+      "docNo": "-",
       "title": "SWS Claim Form",
       "type": "Form",
       "revNo": "",
@@ -94,7 +94,7 @@
     },
     {
       "department": "HR",
-      "docNo": "",
+      "docNo": "-",
       "title": "SWS Induction Form",
       "type": "Form",
       "revNo": "",
