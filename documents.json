@@ -15,6 +15,19 @@
       "videoLink": ""
     },
     {
+      "department": "Procurement",
+      "docNo": "QP-SWSPR-01",
+      "title": "Procurement Procedure",
+      "type": "Procedure",
+      "revNo": "0",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "http://192.168.0.8/myportal/IMS/eDoc/%7B5BD4C515-E63C-404A-9330-D3D83799F3E2%7D_QP-SWSPR-01%20-%20Procurement%20Procedure%20Rev.02.pdf",
+      "videoLink": ""
+    },
+    {
       "department": "Quality",
       "docNo": "QA-03",
       "title": "Supplier Quality Audit",
@@ -29,15 +42,15 @@
     },
     {
       "department": "Quality",
-      "docNo": "",
+      "docNo": "GL-ARQA-03",
       "title": "Project Quality Management Plan",
-      "type": "Procedure",
+      "type": "Guideline",
       "revNo": "0",
       "revDate": "6/24/2026",
       "applicableToWorksite": "Yes",
       "status": "Active",
       "storage": "Drive",
-      "link": "",
+      "link": "http://192.168.0.8/myportal/IMS/eDoc/%7BF2A85250-32C4-47BF-998B-C9CFD61EF6E9%7D_GL-ARQA-03%20Inspection,%20Repair,%20and%20Maintenance%20(IRM)%20Project%20Quality%20Plan%20Guideline%20(New).pdf",
       "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
     },
     {
@@ -56,11 +69,37 @@
     {
       "department": "Quality",
       "docNo": "-",
+      "title": "Quality Notice For External Providers",
+      "type": "Others",
+      "revNo": "0",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "Quality",
+      "docNo": "-",
+      "title": "Process for Management Review Meeting",
+      "type": "Others",
+      "revNo": "0",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "Quality",
+      "docNo": "-",
       "title": "SWS External Providers Pre-Assessment Form",
       "type": "Others",
       "revNo": "0",
       "revDate": "7/22/2026",
-      "applicableToWorksite": "No",
+      "applicableToWorksite": "Yes",
       "status": "Active",
       "storage": "Drive",
       "link": "",
@@ -77,6 +116,19 @@
       "status": "Active",
       "storage": "Drive",
       "link": "https://swssubsea2.github.io/SWSWebQCard/",
+      "videoLink": ""
+    },
+    {
+      "department": "HSSE",
+      "docNo": "",
+      "title": "Management Visit Form",
+      "type": "Form",
+      "revNo": "",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
       "videoLink": ""
     },
     {
@@ -99,7 +151,7 @@
       "type": "Form",
       "revNo": "",
       "revDate": "",
-      "applicableToWorksite": "No",
+      "applicableToWorksite": "Yes",
       "status": "Active",
       "storage": "Drive",
       "link": "",
