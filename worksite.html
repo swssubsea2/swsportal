@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="portal-version" content="20260814-05">
+<meta name="portal-version" content="20260814-06">
 
 
 <title>SWS Work Site Portal</title>
@@ -587,13 +587,13 @@ body{
 
 <div class="container">
 
-<h1>Work Site Portal</h1>
+<h1>SWS Work Site Portal</h1>
 
 <p>
-Controlled Documents Applicable to Work Site
+Controlled Documents Applicable to SWS Work Site
 </p>
 
-<a href="index.html?v=20260814-05" class="back-home">← Back to Homepage</a>
+<a href="index.html?v=20260814-06" class="back-home">← Back to Homepage</a>
 
 </div>
 
@@ -649,11 +649,11 @@ Controlled Documents Applicable to Work Site
 
 <script>
 /*
-PORTAL CACHE VERSION: 20260814-05
+PORTAL CACHE VERSION: 20260814-06
 When publishing a new portal revision, change this version value
 in all three HTML files, for example: 20260721-02.
 */
-const PORTAL_VERSION = "20260814-05";
+const PORTAL_VERSION = "20260814-06";
 
 
 const API_URL = "https://script.google.com/macros/s/AKfycbw7Sh18-XRU-WkgARONPe6eeJbgxFluUzGBs_DXwq8Y80YAdGnZ711s4y8X7OmqqhEnrA/exec";
@@ -1011,6 +1011,35 @@ function renderGuideButton(doc){
     `;
 }
 
+function convertQuickAccessImage(url){
+    const value = safe(url);
+
+    if(!value){
+        return "";
+    }
+
+    // Google Drive share link:
+    // https://drive.google.com/file/d/FILE_ID/view?...
+    let match = value.match(
+        /drive\.google\.com\/file\/d\/([^/?#]+)/
+    );
+
+    if(match){
+        return `https://drive.google.com/thumbnail?id=${encodeURIComponent(match[1])}&sz=w800`;
+    }
+
+    // Google Drive links using ?id=FILE_ID
+    match = value.match(/[?&]id=([^&#]+)/);
+
+    if(value.includes("drive.google.com") && match){
+        return `https://drive.google.com/thumbnail?id=${encodeURIComponent(match[1])}&sz=w800`;
+    }
+
+    // Normal/direct image URL
+    return value;
+}
+
+
 function renderQuickAccess(items){
     const container = document.getElementById("quickAccessList");
     const quickItems = Array.isArray(items) ? items : [];
@@ -1025,7 +1054,9 @@ function renderQuickAccess(items){
     }
 
     container.innerHTML = quickItems.map(item => {
-        const image = safe(item.imageUrl || item.image);
+        const image = convertQuickAccessImage(
+            item.imageUrl || item.image
+        );
 
         const imageHTML = image
             ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}">`
