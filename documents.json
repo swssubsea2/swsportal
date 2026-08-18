@@ -222,15 +222,7 @@
   ],
   "hqQuickAccess": [
     {
-      "title": "WWW",
-      "imageUrl": "SWS Quality Induction.png",
-      "link": "https://youtu.be/a7oA6_fiR9g",
-      "description": "",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
-    },
-    {
-      "title": "X",
+      "title": "Project List",
       "imageUrl": "Project List.png",
       "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
       "description": "",
@@ -244,14 +236,6 @@
       "description": "Alam Maritim Portal is a centralized corporate platform providing employees access to IMS documents, policies, procedures, acknowledgements, and publications.",
       "applicability": "Worksite & HQ",
       "owner": "Alam Maritim Resources Berhad"
-    },
-    {
-      "title": "V",
-      "imageUrl": "Google Drive image link",
-      "link": "Portal link",
-      "description": "This for MRM",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality"
     }
   ],
   "worksiteQuickAccess": [
@@ -260,30 +244,6 @@
       "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
       "link": "https://youtu.be/a7oA6_fiR9g",
       "description": "",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality Dept."
-    },
-    {
-      "title": "Project List",
-      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
-      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
-      "description": "",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality Dept."
-    },
-    {
-      "title": "Alam Corporate Document Portal",
-      "imageUrl": "Google Drive image link",
-      "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
-      "description": "Access Alam Maritim corporate documents",
-      "applicability": "Worksite & HQ",
-      "owner": "AMRB"
-    },
-    {
-      "title": "MRM",
-      "imageUrl": "Google Drive image link",
-      "link": "Portal link",
-      "description": "This for MRM",
       "applicability": "Worksite & HQ",
       "owner": "Quality Dept."
     }
