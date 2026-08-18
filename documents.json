@@ -2,35 +2,9 @@
   "success": true,
   "documents": [
     {
-      "department": "HR",
-      "docNo": "HR-01",
-      "title": "Proc",
-      "type": "Procedure",
-      "revNo": "0",
-      "revDate": "6/24/2026",
-      "applicableToWorksite": "Yes",
-      "status": "Active",
-      "storage": "Drive",
-      "link": "https://drive.google.com/...",
-      "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-      "department": "HR",
-      "docNo": "HR-02",
-      "title": "Employment Procedure",
-      "type": "Procedure",
-      "revNo": "1",
-      "revDate": "6/1/2026",
-      "applicableToWorksite": "Yes",
-      "status": "Active",
-      "storage": "Server",
-      "link": "\\\\192.168.0.170\\SWS-Document-Portal\\1. HQ\\1. QUALITY\\1. PROCEDURES\\QP-SWSPR-03 - Supplier Quality Audit (SQA) Rev 00.pdf",
-      "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
       "department": "Procurement",
       "docNo": "PR-01",
-      "title": "Purchase Procedure",
+      "title": "Requisition Form",
       "type": "Procedure",
       "revNo": "1",
       "revDate": "1/8/2026",
@@ -42,77 +16,90 @@
     },
     {
       "department": "Procurement",
-      "docNo": "PR-02",
-      "title": "Approved Supplier List",
-      "type": "Form",
-      "revNo": "2",
-      "revDate": "6/2/2026",
-      "applicableToWorksite": "No",
+      "docNo": "QP-SWSPR-01",
+      "title": "Procurement Procedure",
+      "type": "Procedure",
+      "revNo": "0",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
       "status": "Active",
-      "storage": "Server",
-      "link": "\"\\\\192.168.0.170\\SWS-Document-Portal\\1. HQ\\1. QUALITY\\1. PROCEDURES\\QP-SWSPR-03 - Supplier Quality Audit (SQA) Rev 00.pdf\"",
+      "storage": "Drive",
+      "link": "http://192.168.0.8/myportal/IMS/eDoc/%7B5BD4C515-E63C-404A-9330-D3D83799F3E2%7D_QP-SWSPR-01%20-%20Procurement%20Procedure%20Rev.02.pdf",
       "videoLink": ""
     },
     {
       "department": "Quality",
-      "docNo": "QA-01",
-      "title": "Internal Audit Procedure",
-      "type": "Procedure",
-      "revNo": "0",
-      "revDate": "10/06/2026",
-      "applicableToWorksite": "No",
-      "status": "Active",
-      "storage": "Server",
-      "link": "",
-      "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-      "department": "Quality",
-      "docNo": "QA-02",
-      "title": "Corrective Action Request Form",
-      "type": "Form",
-      "revNo": "3",
-      "revDate": "01/21/2026",
-      "applicableToWorksite": "Yes",
-      "status": "Active",
-      "storage": "Server",
-      "link": "https://drive.google.com/...",
-      "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
-    },
-    {
-      "department": "Quality",
-      "docNo": "QA-03",
-      "title": "Supplier Quality Procedure",
+      "docNo": "QP-SWSPR-03",
+      "title": "Supplier Quality Audit",
       "type": "Procedure",
       "revNo": "1",
       "revDate": "7/14/2026",
       "applicableToWorksite": "No",
       "status": "Active",
-      "storage": "Server",
-      "link": "\\\\192.168.0.170\\SWS-Document-Portal\\1. HQ\\1. QUALITY\\1. PROCEDURES\\QP-SWSPR-03 - Supplier Quality Audit (SQA) Rev 00.pdf",
+      "storage": "Drive",
+      "link": "http://192.168.0.8/myportal/IMS/eDoc/%7BE39E927C-4E1B-4212-99F2-E78689B5F888%7D_QP-SWSPR-03%20-%20Supplier%20Quality%20Audit%20(SQA)%20Rev%2000B.pdf",
       "videoLink": ""
     },
     {
-      "department": "Procurement",
-      "docNo": "",
-      "title": "Management Review",
-      "type": "Others",
-      "revNo": "",
-      "revDate": "7/10/2026",
+      "department": "Quality",
+      "docNo": "GL-ARQA-03",
+      "title": "Project Quality Management Plan",
+      "type": "Guideline",
+      "revNo": "0",
+      "revDate": "6/24/2026",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "http://192.168.0.8/myportal/IMS/eDoc/%7BF2A85250-32C4-47BF-998B-C9CFD61EF6E9%7D_GL-ARQA-03%20Inspection,%20Repair,%20and%20Maintenance%20(IRM)%20Project%20Quality%20Plan%20Guideline%20(New).pdf",
+      "videoLink": "https://www.youtube.com/watch?v=s98qxYBhgvs"
+    },
+    {
+      "department": "Quality",
+      "docNo": "IMSF-CTM-03-01",
+      "title": "Client Satisfaction Survey Form",
+      "type": "Form",
+      "revNo": "4",
+      "revDate": "7/6/2026",
       "applicableToWorksite": "No",
       "status": "Active",
-      "storage": "Server",
-      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
+      "storage": "Drive",
+      "link": "https://docs.google.com/document/d/1Z5PpKpNeIp3U2LKwHc8mqoOuXwWsBtlQ/edit?usp=sharing&ouid=116732563627075029413&rtpof=true&sd=true",
       "videoLink": ""
     },
     {
-      "department": "HSSE",
+      "department": "Quality",
       "docNo": "-",
-      "title": "Spec Sheet",
+      "title": "Quality Notice For External Providers",
       "type": "Others",
-      "revNo": "",
+      "revNo": "0",
       "revDate": "",
-      "applicableToWorksite": "No",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "Quality",
+      "docNo": "-",
+      "title": "Process for Management Review Meeting",
+      "type": "Others",
+      "revNo": "0",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "Quality",
+      "docNo": "-",
+      "title": "SWS External Providers Pre-Assessment Form",
+      "type": "Others",
+      "revNo": "0",
+      "revDate": "7/22/2026",
+      "applicableToWorksite": "Yes",
       "status": "Active",
       "storage": "Drive",
       "link": "",
@@ -127,21 +114,47 @@
       "revDate": "",
       "applicableToWorksite": "Yes",
       "status": "Active",
-      "storage": "Server",
+      "storage": "Drive",
       "link": "https://swssubsea2.github.io/SWSWebQCard/",
       "videoLink": ""
     },
     {
-      "department": "Quality",
+      "department": "HSSE",
       "docNo": "-",
-      "title": "SWS External Providers Pre-Assessment Form",
-      "type": "Others",
-      "revNo": "0",
-      "revDate": "7/22/2026",
-      "applicableToWorksite": "No",
+      "title": "Management Visit Form",
+      "type": "Form",
+      "revNo": "",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
       "status": "Active",
       "storage": "Drive",
-      "link": "https://forms.gle/kf1RsqsgsqmqSs5N8",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "HR",
+      "docNo": "-",
+      "title": "SWS Claim Form",
+      "type": "Form",
+      "revNo": "",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
+      "videoLink": ""
+    },
+    {
+      "department": "HR",
+      "docNo": "-",
+      "title": "SWS Induction Form",
+      "type": "Form",
+      "revNo": "",
+      "revDate": "",
+      "applicableToWorksite": "Yes",
+      "status": "Active",
+      "storage": "Drive",
+      "link": "",
       "videoLink": ""
     }
   ],
@@ -150,73 +163,67 @@
       "active": "Yes",
       "sort": 1,
       "icon": "🏆",
-      "message": "hMMM"
+      "message": "Under development"
     },
     {
       "active": "Yes",
       "sort": 2,
       "icon": "📢",
-      "message": "ahahahaha"
+      "message": "Under development"
     },
     {
       "active": "Yes",
       "sort": 3,
       "icon": "📄",
-      "message": "Wooooooo"
+      "message": "Under development"
     }
   ],
   "worksiteTicker": [
     {
       "active": "Yes",
       "sort": 1,
-      "icon": "🏆",
-      "message": "kkkk"
-    },
-    {
-      "active": "Yes",
-      "sort": 2,
       "icon": "📢",
-      "message": "kkkk"
+      "message": "Quality Notice for External Providers, Rev. 00, has now been published under the Quality Department"
     },
     {
       "active": "Yes",
       "sort": 3,
-      "icon": "📄",
-      "message": "kkkk"
+      "icon": "",
+      "message": "-"
     }
   ],
   "hqCampaign": [
     {
       "active": "Yes",
-      "title": "Quality Benefit",
+      "title": "Focus On Quality",
       "description": "",
-      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing"
+      "mediaUrl": "https://drive.google.com/file/d/1UIFHSzxxqsLZYW0MDhgnzsZvFduvSNwq/view?usp=drive_link"
     },
     {
       "active": "Yes",
-      "title": "What is Quality Management",
-      "description": "Please watch",
-      "mediaUrl": "https://www.youtube.com/watch?v=UXChmphBrw0"
+      "title": "SWS Quality Induction",
+      "description": "Quality Induction provides an introduction to essential quality awareness and SWS quality expectations.",
+      "mediaUrl": "https://youtu.be/s98qxYBhgvs?si=VjctAXwH0z0HxoZO"
     }
   ],
   "worksiteCampaign": [
     {
       "active": "Yes",
-      "title": "Quality Benefit",
-      "description": "Weiiii",
-      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing"
+      "title": "Focus On Quality",
+      "description": "",
+      "mediaUrl": "https://drive.google.com/file/d/1UIFHSzxxqsLZYW0MDhgnzsZvFduvSNwq/view?usp=drive_link"
     },
     {
       "active": "Yes",
-      "title": "Quality Poster 2",
-      "description": "Working together for quality, reliability and accountability.",
-      "mediaUrl": "https://www.youtube.com/watch?v=bN850IMtuNU"
+      "title": "SWS Quality Induction",
+      "description": "Quality Induction provides an introduction to essential quality awareness and SWS quality expectations.",
+      "mediaUrl": "https://youtu.be/s98qxYBhgvs?si=VjctAXwH0z0HxoZO"
     }
   ],
   "hqQuickAccess": [
     {
       "title": "WWW",
-      "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
+      "imageUrl": "SWS Quality Induction.png",
       "link": "https://youtu.be/a7oA6_fiR9g",
       "description": "",
       "applicability": "Worksite & HQ",
@@ -224,19 +231,19 @@
     },
     {
       "title": "X",
-      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
+      "imageUrl": "Project List.png",
       "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
       "description": "",
       "applicability": "Worksite & HQ",
       "owner": "Quality Department"
     },
     {
-      "title": "C",
-      "imageUrl": "Google Drive image link",
+      "title": "AMRB MyPortal",
+      "imageUrl": "Alam Maritim MyPortal.png",
       "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
-      "description": "Access Alam Maritim corporate documents",
+      "description": "Alam Maritim Portal is a centralized corporate platform providing employees access to IMS documents, policies, procedures, acknowledgements, and publications.",
       "applicability": "Worksite & HQ",
-      "owner": ""
+      "owner": "Alam Maritim Resources Berhad"
     },
     {
       "title": "V",
@@ -254,7 +261,7 @@
       "link": "https://youtu.be/a7oA6_fiR9g",
       "description": "",
       "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
+      "owner": "Quality Dept."
     },
     {
       "title": "Project List",
@@ -262,7 +269,7 @@
       "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
       "description": "",
       "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
+      "owner": "Quality Dept."
     },
     {
       "title": "Alam Corporate Document Portal",
@@ -270,7 +277,7 @@
       "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
       "description": "Access Alam Maritim corporate documents",
       "applicability": "Worksite & HQ",
-      "owner": ""
+      "owner": "AMRB"
     },
     {
       "title": "MRM",
@@ -278,59 +285,9 @@
       "link": "Portal link",
       "description": "This for MRM",
       "applicability": "Worksite & HQ",
-      "owner": "Quality"
+      "owner": "Quality Dept."
     }
   ],
-  "campaign": [
-    {
-      "active": "Yes",
-      "title": "Quality Benefit",
-      "description": "Weiiii",
-      "mediaUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
-      "imageUrl": "https://drive.google.com/file/d/1xw823H1dJgNnk-FV63ippnIpl6RjA7qk/view?usp=sharing",
-      "link": ""
-    },
-    {
-      "active": "Yes",
-      "title": "Quality Poster 2",
-      "description": "Youtube",
-      "mediaUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
-      "imageUrl": "https://www.youtube.com/watch?v=bN850IMtuNU",
-      "link": ""
-    }
-  ],
-  "quickAccess": [
-    {
-      "title": "SWS Quality Induction",
-      "imageUrl": "https://drive.google.com/file/d/1Kqf5h0Gjc0otvDhBXuImZxPSoMPu8O0U/view?usp=drive_link",
-      "link": "https://youtu.be/a7oA6_fiR9g",
-      "description": "",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
-    },
-    {
-      "title": "Project List",
-      "imageUrl": "https://drive.google.com/file/d/1-EQCC96pa1VPCmDLsYerUInPqzPg-DC9/view?usp=drive_link",
-      "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
-      "description": "",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
-    },
-    {
-      "title": "Alam Corporate Document Portal",
-      "imageUrl": "Google Drive image link",
-      "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
-      "description": "Access Alam Maritim corporate documents",
-      "applicability": "Worksite & HQ",
-      "owner": ""
-    },
-    {
-      "title": "MRM",
-      "imageUrl": "Google Drive image link",
-      "link": "Portal link",
-      "description": "This for MRM",
-      "applicability": "Worksite & HQ",
-      "owner": "Quality"
-    }
-  ]
+  "campaign": [],
+  "quickAccess": []
 }
