@@ -120,7 +120,7 @@
     },
     {
       "department": "HSSE",
-      "docNo": "",
+      "docNo": "-",
       "title": "Management Visit Form",
       "type": "Form",
       "revNo": "",
@@ -163,19 +163,19 @@
       "active": "Yes",
       "sort": 1,
       "icon": "🏆",
-      "message": "hMMM"
+      "message": "Under development"
     },
     {
       "active": "Yes",
       "sort": 2,
       "icon": "📢",
-      "message": "ahahahaha"
+      "message": "Under development"
     },
     {
       "active": "Yes",
       "sort": 3,
       "icon": "📄",
-      "message": "Wooooooo"
+      "message": "Under development"
     }
   ],
   "worksiteTicker": [
@@ -184,6 +184,12 @@
       "sort": 1,
       "icon": "📢",
       "message": "Quality Notice for External Providers, Rev. 00, has now been published under the Quality Department"
+    },
+    {
+      "active": "Yes",
+      "sort": 3,
+      "icon": "",
+      "message": "-"
     }
   ],
   "hqCampaign": [
@@ -255,7 +261,7 @@
       "link": "https://youtu.be/a7oA6_fiR9g",
       "description": "",
       "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
+      "owner": "Quality Dept."
     },
     {
       "title": "Project List",
@@ -263,7 +269,7 @@
       "link": "https://alammaritimcommy-my.sharepoint.com/:x:/g/personal/wanbad_subsea_alam-maritim_com_my/IQAmU-GHlUBMTJCM0FHFcVSzAQv4Ydam836DKw1rmbba1tY?e=I6OQuU",
       "description": "",
       "applicability": "Worksite & HQ",
-      "owner": "Quality Department"
+      "owner": "Quality Dept."
     },
     {
       "title": "Alam Corporate Document Portal",
@@ -271,7 +277,7 @@
       "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
       "description": "Access Alam Maritim corporate documents",
       "applicability": "Worksite & HQ",
-      "owner": ""
+      "owner": "AMRB"
     },
     {
       "title": "MRM",
@@ -279,7 +285,7 @@
       "link": "Portal link",
       "description": "This for MRM",
       "applicability": "Worksite & HQ",
-      "owner": "Quality"
+      "owner": "Quality Dept."
     }
   ],
   "campaign": [],
