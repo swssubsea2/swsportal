@@ -2,9 +2,9 @@
   "success": true,
   "documents": [
     {
-      "department": "HR",
-      "docNo": "HR-01",
-      "title": "Proc",
+      "department": "Quality",
+      "docNo": "",
+      "title": "Project Quality Management Plan",
       "type": "Procedure",
       "revNo": "0",
       "revDate": "6/24/2026",
@@ -30,7 +30,7 @@
     {
       "department": "Procurement",
       "docNo": "PR-01",
-      "title": "Purchase Procedure",
+      "title": "Requisition Form",
       "type": "Procedure",
       "revNo": "1",
       "revDate": "1/8/2026",
@@ -231,10 +231,10 @@
       "owner": "Quality Department"
     },
     {
-      "title": "C",
-      "imageUrl": "Google Drive image link",
+      "title": "AMRB MyPortal",
+      "imageUrl": "",
       "link": "http://192.168.0.8/myportal/eUser/homepage.asp",
-      "description": "Access Alam Maritim corporate documents",
+      "description": "Alam Maritim Portal is a centralized corporate platform providing employees access to IMS documents, policies, procedures, acknowledgements, and publications.",
       "applicability": "Worksite & HQ",
       "owner": ""
     },
